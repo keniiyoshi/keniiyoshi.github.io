@@ -1,0 +1,29 @@
+body{
+  font-family: Arial;
+  display: inline-block;
+  padding: 0; margin: 0;
+}
+
+h1{
+  text-align: center;
+}
+
+
+.my-div{
+  color: purple;
+}
+
+.special-div{
+  color: green;
+}
+
+.list{
+  color: black;
+  font-size: 18px;
+}
+
+canvas{
+	display: block;
+	margin: 20px auto;
+}
+

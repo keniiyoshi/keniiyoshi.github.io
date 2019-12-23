@@ -1,0 +1,207 @@
+body{
+	max-width: 100%;
+	width: 100%;
+	/*font-size based on viewport-percentage width*/
+	font-size: 1.6vw;
+	font-family: 'Franklin Gothic Medium Cond', sans-serif;
+	background-image: url("crawlbackground.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	text-align: center;
+	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 	
+}
+
+/*for background video*/
+#video_background{
+	position: absolute;
+    left: 0px;
+    top: 0px;
+	opacity: 0.5;
+	z-index: -1;
+}
+
+img{
+	width: 95%;
+	height: 95%;
+	display: inline-block;
+	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 	
+}
+
+/*for 2 column formatting*/
+.column {
+    float: left;
+    width: 50%;
+    opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 
+}
+
+/*button on the first page*/
+.button-beginning{
+	cursor: pointer;
+	display: inline-block;
+	width: 100%;
+	/*magic number*/
+	height: 8%;
+	font-size: 3.2vw;
+	/*light sky blue color*/
+	background-color: rgb(135,206,250);
+  	position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center
+	z-index: 1;
+	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 	
+}
+
+.button-beginning:hover{
+	background-color: blue;
+}
+
+/*button on the remaining pages*/
+.button-decisions{
+	cursor: pointer;
+	display: inline-block;
+	width: 48%;
+	/*magic number*/
+	height: 20%;
+	font-size: 1.6vw;
+	margin: 10 %;
+	/*light sky blue color*/
+	background-color: rgb(135,206,250);
+  	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 	
+}
+
+.button-decisions:hover{
+	background-color: blue;
+}
+
+/*for the 8 content divs*/
+.content{
+	/*end credit font color*/
+	color: rgb(28,165,225);
+}
+
+/*the folllowing 3 blocks define properties for dialogues*/
+#you{
+	color: lightblue;
+	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 
+}
+
+#yoda{
+	color: green;
+	opacity: 0;	
+	animation-name: fadeInOut; 
+	animation-duration: 600s; 	
+}
+
+#ben{
+	color: magenta;	
+	opacity: 0;	
+	animation-name: fadeInOut;
+	animation-duration: 600s; 	
+}
+
+/*starwars crawl css*/
+.starwars{
+  /* Force the body to fill the entire screen */
+  width: 100%;
+  height: 100%;
+  /* Hide elements that flow outside the viewable space */
+  overflow: hidden;
+}
+
+.fade {
+  position: relative;
+  width: 100%;
+  /*originally 60vh*/
+  min-height: 30vh;
+  top: -25px;
+  background-image: linear-gradient(0deg, transparent, black 75%);
+  z-index: 1;
+}
+
+.star-wars {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  /*originally 800px (magic number)*/
+  height: 560px;
+  /*customizeable*/
+  color: #feda4a;
+  font-family: 'Pathway Gothic One', sans-serif;
+  /*originally 500%*/
+  font-size: 200%;
+  font-weight: 600;
+  letter-spacing: 6px;
+  line-height: 150%;
+  perspective: 400px;
+  text-align: justify;
+  opacity: 0;	
+  animation-name: fadeInOut;
+  animation-duration: 600s; 	
+}
+
+.crawl {
+  position: relative;
+  top: 99999px;
+  transform-origin: 50% 100%;
+  /*originally 60s*/
+  animation: crawl 120s linear;
+}
+
+.crawl > .title {
+  font-size: 90%;
+  text-align: center;
+}
+
+.crawl > .title h1 {
+  margin: 0 0 100px;
+  text-transform: uppercase;
+}
+
+@keyframes crawl {
+    0% {
+    top: -100px;
+    transform: rotateX(20deg)  translateZ(0);
+  }
+    100% { 
+    /*speed of scrolling?*/
+    top: -6000px;
+    /*speed of going back*/
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+}
+
+/*fade in animation*/
+.animation-box {
+  width: 100%;
+  height: 100%;
+  background-color: none;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  /*originally 0, but made it 1 to keep the text*/
+  100% {
+    opacity: 1;
+  }
+}

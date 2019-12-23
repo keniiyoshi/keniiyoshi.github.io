@@ -1,0 +1,66 @@
+body{
+	font-size: 24px;
+	font-family: 'Jura', sans-serif;
+}
+
+.main-container{
+	max-width: 1080px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.header{
+	text-align: center;
+	font-size: 2em;
+	margin-top: 5px;
+}
+
+.buttons{
+	width: 100%;
+	margin: 10px auto 10px;
+}
+
+/*Buttons in a row*/
+.button-main{
+	width: 16%;
+	height: 20px;
+	font-size: 0.6em;
+	margin: 10 %;
+	background-color: pink;
+  border: none;
+}
+
+/* Buttons in a column
+.button-main{
+	display: block;
+	width: 30%;
+	height: 60px;
+	font-size: 0.7em;
+	margin: 20px 35%;
+	background-color: rgb(157,180,255);
+} */
+
+.button-main:hover{
+	background-color: rgb(255,236,239);
+	color: black;
+}
+
+.description{
+	text-align: center;
+	font-size: 0.8em;
+}
+
+.content{
+	display: inline;
+}
+
+/*if necesseary,  all the yoda ids for "you" dialoges will be replaced with you ids.*/
+/*#you,#yoda{
+	display: inline;
+}*/
+
+#map {
+  height: 330px;
+  width: 100%; 
+  display: inline-block;
+}

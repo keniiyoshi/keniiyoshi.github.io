@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width">
+		<title>Explorable Stories Project 2: Huangpu Awakens</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<!-- background video: -->
+		<video id="video_background" width=100% height=100% autoplay muted loop>
+		  <source src="backgroundvideo.mp4" type="video/mp4">
+		</video>
+
+		</div>
+			<!--content 1 of 8 -->
+			<div id="content-zero" class="content">
+				<!-- Audio for intro -->
+				<audio id="intro">
+				  <source src="intro.mp3" type="audio/mpeg">
+				</audio>
+				<!-- star wars crawl effect -->
+				<div class="starwars">
+					<div class="fade"></div>
+					<section class="star-wars">
+					  <div class="crawl">
+					    <div class="title">
+					      <p>Episode NYUAD</p>
+					      <h1>HUANGPU AWAKENS</h1>
+						    </div>
+						    <p>It is a period of study abroad. Luke Skywalker, escaping from Saadiyat Island, has won his NYUSH study away.</p>     
+						    <p>During the escape, Obi Wan Kenobi instructs Luke to train under the retired Jedi master, Yoda, who possesses the memory skills necessary to remember important location names in Shanghai.</p>
+						    <p>Pursued by the boredom of packing, Luke races to Huangpu aboard his X-Wing, the central district in Shanghai where Yoda resides in.</p>
+							 </div>
+					</section>
+				</div>
+				<button class="button-beginning" id="button-start">Start your training!</button>
+			</div>
+
+			<!--content 2 of 8 -->
+			<div id="content-one" class="content">			    			
+				<audio id="tatooine">
+					  <source src="tatooineshort.mp3" type="audio/mpeg">
+					</audio>
+				<div class="row">
+					<div class="column">
+					  	<img src="xwing.png" alt="xwing">
+					  	<div id="you" class="you">You: My X-wing landed on Huangpu river, which is in the Huangpu district of Shanghai. Wow! The skyscrapers on the eastern side looks amazing! Now all I have to do is find this Yoda... if he even exists. Still... there's something familiar about this place. I feel like... like I'm being watched!</div>
+						<div id="yoda" class="yoda">Yoda: Away with your weapon! I mean you no harm. What makes a young warrior come here?</div>
+						<div id="you" class="you">You: I'm looking for a Jedi Master.</div>
+						<div id="yoda" class="yoda">Yoda: Ooooh. Jedi Master. Yoda. You seek Yoda. Take you to him, I will. But now, we must have a cup of tea. Come. Good tea. Come. I am wondering, does your X-wing weigh ton?</div>
+						<div id="you">You: Yeah I guess.</div>
+						<div id="yoda" class="yoda">Yoda: Then you are in the right place.</div>
+						<div id="you">You: I don't get it. What does X-wing has to do with this place?</div>
+						<div id="yoda">Yoda: Don't you see? Weigh, ton... Waitan! We are in Waitan right now. mhmmmmm.</div>
+						<div id="you">You: (...what am I even doing here... )</div>
+						<button class="button-decisions" id="button-continue">Continue</button>
+					</div>
+					<div class="column">
+						<img src="waitanmap.png" alt="waitan map">
+						<img src="waitan.jpg" alt="waitan">		
+					</div>
+				</div>
+				
+			</div>
+
+			<!--content 3 of 8 -->
+			<div id="content-two" class="content">
+					<audio id="revealed">
+					  <source src="revealed.mp3" type="audio/mpeg">
+					</audio>
+				<div class="row">
+					<div class="column">
+						<div id="you">You: Look, I'm sure this tea is delicious, and this "The Go Bar" (planet Dagobah pun?) is a nice international cafe for you. I just don't understand why we can't see Yoda now.</div>
+						<div id="yoda">Yoda: Do not be so Antsy! For the Jedi it is time to drink tea as well. Drink, drink. Hot. Good tea, hm? Good, hmm?</div>
+						<div id="you">You: Oh, I don't know what I'm doing here. We're wasting our time.</div>
+						<div id="yoda">Yoda: ...I cannot teach him. The boy has no patience. Hmmm. Much anger in him, like his father.</div>
+						<div id="ben">Ben (just his voice due to his spirit form. You slowly realize this): Was I any different when you taught me?</div>
+						<div id="yoda">Yoda: Hah. He is not ready.</div>
+						<div id="you">You: Yoda! I am ready. I... Ben! I can be a global leader. Ben, tell him I'm ready. I won't fail you - I can put myself outside of the comfort zone... and play the new octave!.</div>
+						<div id="yoda">Yoda: ...Oh, you will be. You will be..</div>
+						<div id="ben">Ben: Luke, I forgot to say one thing to you. Master Yoda also happens to be a great pun master.</div>
+						<div id="you">You: Jesus Ben this I'm not here to have fun.</div>
+						<div id="yoda">Yoda: Oh no young Skywalker. This is exactly why you are here. Puns, especially bizarre ones, serve as great memorization tools. In fact, this completes the second pun of the day.</div>
+						<div id="you">You: Oh god... Tea, Antsy, Fun... Tianzifang.</div>
+						<div id="yoda">Yoda: You will be afraid partially because of this too.</div>
+						<div id="you">You: (...Some lousy puns won't stop me. Now... I will just:)</div>
+						<button class="button-decisions" id="button-E">keep pushing Ben to convince Yoda to accept me. Or else, Yoda might give up on me.</button>
+						<button class="button-decisions" id="button-I">just be patient for Yoda to accept my request. Decisions take time to prepare.</button>
+						<video id="ready" width=95% height=95% autoplay muted loop><source src="ready.mp4" type="video/mp4"></video>
+					</div>
+					<div class="column">
+						<img src="tianzifangmap.png" alt="tianzifang map">
+						<img src="tianzifang.jpg" alt="tianzifang">
+					</div>
+				</div>
+
+			</div>
+
+			<!--content 4 of 8 -->
+			<div id="content-three" class="content">
+					<audio id="training">
+					  <source src="training.mp3" type="audio/mpeg">
+					</audio>
+				<div class="row">
+					<div class="column">
+						<div id="you">You: Master Yoda, why did your have me buy some naan and drink from Nanjing Lu?</div>
+						<div id="yoda">Yoda: You will see soon. Now, glue them. </div>
+						<div id="you">You: (... naan, gin, glue... nanjing lu... I'm starting to get a hang of his pun... although not fun...)</div>
+						<div id="yoda">Yoda: Yes. A global leaders's strength flows from the Force. But beware of the dark side. Anger... fear... aggression. Quicker, easier, more seductive. Easily they flow, quick to join you in procrastination. A true Jedi uses the Force for community serving and self empowerment. Now, a challenge for you ... lift the X-ring using your force and bring it here.</div>
+						<div id="you">You: Master, glueing naan and gin together is one thing. This is totally different.</div>
+						<div id="yoda">Yoda: No! No different! Only different in your mind. You must unlearn what you have learned.</div>
+						<div id="you">You: All right, I'll give it a try... just like trying any of the food here I don't know.</div>
+						<div id="yoda">Yoda: No! Try not. Do. Or do not. There is no try.</div>
+						<div id="you">You: (The X-wing won't budge... it's too big (hm... study-away essays)... I should:)</div>
+						<button class="button-decisions" id="button-S"> keep pretending that I know what I'm doing.</button>
+						<button class="button-decisions" id="button-N"> tell master that this is simply impossible.</button>
+						<img src="naan.jpg" alt="naan">
+					</div>
+					<div class="column">
+						<img src="nanjinglumap.png" alt="nanjinglu map">
+						<img src="nanjingroad.jpg" alt="nanjingroad">
+						<img src="gin.jpg" alt="gin">
+					</div>
+				</div>
+			</div>
+
+			<!--content 5 of 8 -->
+			<div id="content-four" class="content">
+				<audio id="lift">
+				  <source src="yoda.mp3" type="audio/mpeg">
+				</audio>
+				<div class="row">
+				<div class="column">
+					<img src="yoda.gif" alt="yoda.gif">
+					<div id="you">You: ...I can't believe.</div>
+					<div id="yoda">Yoda: That is why you procrastinate. Take rest, we shall. Fly us to Yuyuan. Train your logic skills, you need to. A nice garden meansr a nice game of Chinese chess. Let's play young Skywalker. </div>
+					<div id="you">You: Ok!</div>
+					<div id="yoda">Yoda: Mhmmm, I must warn you. Yoda not only a Jedi master. Yoda also a Chinese chess master. Harder than being a Jedi. </div>
+					<div id="you">You: (I don't buy what he is saying, because I'm beating the crap out of him.)</div>
+					<div id="yoda">Yoda: ...Unbelievable... You, you won!</div>
+					<div id="you">You: (Yuyuan, he never stops punning does he...You, you, won... Yuyuan)</div>
+					<div id="yoda">Yoda: Old and weak have I become... when nine hundred years old you reach, play as smart you will not. Hmm?...Rematch younh Skywalker!</div>
+					<div id="you">You: (I should probably:)</div>
+					<button class="button-decisions" id="button-T">beat him again. After all, this is part of my training.</button>
+					<button class="button-decisions" id="button-F">intentionally lose. I don't want to make master feel old.</button>
+					</div>
+				<div class="column">
+					<img src="yuyuanmap.png" alt="yuyuan map">
+					<img src="yuyuan.jpg" alt="yuyuan">
+				</div>
+				</div>
+			</div>
+
+			<!--content 6 of 8 -->
+			<div id="content-five" class="content">
+				<audio id="seeing">
+				  <source src="victory.mp3" type="audio/mpeg">
+				</audio>
+				<div class="row">
+					<div class="column">
+						<div id="yoda">Yoda: Concentrate... feel the Force flow. Yes. Good. Calm, yes. Through the Force, things you will see. Other places. The future... the past. Classmates long gone...</div>
+						<div id="you">You: Han! Leia!</div>
+						<div id="yoda">Yoda: Hmm. Control, control. You must learn control.</div>
+						<div id="you">You: I saw ... I saw sleepless nights...</div>
+						<div id="yoda">Yoda: Mmm. Friends you have there.</div>
+						<div id="you">You: FoS... Data Structures...They were in pain.</div>
+						<div id="yoda">Yoda: is the future you see.</div>
+						<div id="you">You: ...I've got to go to them.</div>
+						<div id="yoda">Yoda: Decide you must how to serve them best. If you leave now, help them you could. But you would spoil them, destroying all for which they have fought and suffered...OW!</div>					
+						<div id="you">You: Are you ok master!?</div>
+						<div id="yoda">Yoda: Yes yes fine, I am. On that chair, I hit my shin... I want more tea. Handy, it will be. </div>
+						<div id="you">You: (God damm it why is he obsessed with puns) Shin, tea, handy. I get it master.</div>
+						<div id="yoda">Yoda: Anyways...You must not go!</div>
+						<div id="you">You: But Han and Leia's health and well-being will be in danger if I don't.</div>
+						<div id="ben">Ben: You don't know that. Even Yoda cannot see their fate. If you choose to befriend them, you will have to hear them boasting about their workload. It will happn countless times. I cannot interfere.</div>
+						<div id="you">You: ... I understand. I will go now (I should:)</div>
+						<button class="button-decisions" id="button-P"> introduce Han and Leia to my friend in the REACH program.</button>
+						<button class="button-decisions" id="button-J"> advise Han and Leia to get help from the ARC.</button>
+					</div>
+					<div class="column">
+						<img src="xintiandimap.png" alt="xintiandi map">
+						<img src="xintiandi.jpg" alt="xintiandi">
+					</div>
+				</div>
+			</div>
+
+			<!--content 7 of 8 -->
+			<div id="content-six" class="content">
+				<audio id="throneroom">
+					  <source src="throneroom.mp3" type="audio/mpeg">
+					</audio>
+				<div class="row">
+					<div class="column">
+						<div id="you">You: Master, I have come back to complete the training.</div>
+						<div id="yoda">Yoda: No more training, do you require. Already know you that which you need.</div>
+						<div id="you">You: Then I am a global leader .</div>
+						<div id="yoda">Yoda: Not yet. First be a Shanghai master, you must. Learning Chinese. Their culture. Their history. Their economy. Their politics. You must confront these. Then, only then, a Shanghai master, and then a Jedi will you be. And confront them, you will.</div>
+						<!-- The 16 different results: -->
+						<div id="INTJ" class="end">Yoda: Imaginative and strategic thinker, you are, with a plan for everything. Take care, you must still. It is often  a challenge for you to find like-minded individuals given your relentless intellectual approach to global learning. To sustain the intensity of your learning, I encourage you to have good friends who can support you.</div>
+
+						<div id="INTP" class="end">Yoda: Innovative inventor, you are, with an unquenchable thirtst for knowledge. Take care, you must still. You have a tendency to share your thoughts to others before thinking it through.</div>
+
+						<div id="ENTJ" class="end">Yoda: Bold, imaginative, and strong-willed, you are, always finding or making a way to learn things efficiently. Take care, you must still. You can be at times insensitively call out others' failures, bringing yourself into trouble.</div>
+
+						<div id="ENTP" class="end">Yoda: Smart and curious thinker, you are. Always ready for an intellectual challenge. Take care, you must still. You tend to focus on comping up with ideas rather than implementing them on a daily basis. When in doubt, ust go out in the city and immerse yourself with the language in cultural learning.</div>
+
+						<div id="INFJ" class="end">Yoda: QUiet and mystical, you are, yet very inspiring and tireless idealist. Take care, you must still. Your passion is perfectly capable of carrying you past your breaking point and if your zeal gets out of hand, you can find yourself exhausted, unhealthy and stressed. It will help to have a  good friend who can keep in touch with you.</div>
+
+						<div id="INFP" class="end">Yoda: Poetic, kind and altruistic, you are, always eager to help a good cause. Take care, you must still. You carry a high risk of feeling misunderstood. When in doubt, trust yourself and keep moving forward.</div>
+
+						<div id="ENFJ" class="end">Yoda: Charismatic and inspiring, you are, able to mesmerize your listeners. Take care, you must still. Altough you have a tremendous capacity for reflecting on and analyzing your own feelings, if you get too caught up in another person’s plight, you can become very anxious, seeing other people’s problems in yourself, trying to fix something in yourself that is not wrong.</div>
+
+						<div id="ENFP" class="end">Yoda: Enthusiastic, creative and sociable free spirit, you are, who can always find a reason to smile. Take care, you must still. If you rely too much on your intuition, assume or anticipate too much about a friend’s motivations, you can misread the signals and frustrate study plans that a more straightforward approach would have made simple.</div>
+
+						<div id="ISTJ" class="end">Yoda: Practical and fact-minded, you are, with undeniable reliability. Take care, you must still. You have little tolerance for indecisiveness, and lose patience even more quickly if your chosen course is challenged with impractical theories, especially if they ignore key details – if challenges becomes time-consuming debates, you can become noticeably angry as deadlines tick nearer.</div>
+						<div id="ISFJ" class="end">Yoda: Very dedicated and warm, you are, always ready to defend your loved ones. Take care, you must still. You need to know when to say no and stand up for yourself if you are to maintain your confidence and enthusiasm.</div>
+						<div id="ESTJ" class="end">Yoda: Extraordinarily caring, social and popular, you are, always eager to help. However, do be careful. You need to recognize that not everyone follows the same path or contributes in the same way.</div>
+
+						<div id="ESFJ" class="end">Yoda: Excellent at administrative tasks, you are, unsurpassed at managing things – or people. Take care, you must still. You should keep in mind that people come from many backgrounds and perspectives, and what may seem right to them is not always an absolute truth.</div>
+
+						<div id="ISTP" class="end">Yoda: Bold and practical, you are, showing mastery with many kinds of tools. Take care, you must still. You often act too soon, taking for granted your permissive nature and assuming that others are the same. Take a breath from time to time to reflect on your global experience</div>
+
+						<div id="ISFP" class="end">Yoda: Flexible and charming, you are, always ready to explore and experience something new. Take care, you must still. You find planning for the future to be quite challenging, as you plan actions and behaviors as contributions to a sense of identity, building a portfolio of experiences, not stocks.</div>
+
+						<div id="ESTP" class="end">Yoda: Smart, energetic and very perceptive, you are. Living on the edge is a great enjoyment for you. Take care, you must still. You may get too caught in the moment, take things too far, and run roughshod over more sensitive people, or forget to take care of your own health and safety.</div>
+
+						<div id="ESFP" class="end">Yoda: Spontaneous, energetic and enthusiastic entertainer, you are. Life is always exciting around you. Take care, you must still. You are often so focused on immediate pleasures that you neglect the learning and deadlines that make those luxuries possible.</div>
+
+						<!-- dialogue continued -->
+						<div id="you">You: Ok, I will work on it.</div>
+						<div id="yoda">Yoda: Pass on what you have learned. You, you behind the screen. Visit the places, you must. Become more united with the force of Huangpu! Even if you do not manage to, fine it will be. Conversant about recommending your friends where to visit in Shanghai, you will be. Sharing to your NYUAD friends, destiny, it will be...</div>
+
+						<!-- Goes to About/Credit section -->
+						<button class="button-decisions" id="button-aboutcredit">Finish!</button>
+						</div>
+					<div class="column">
+						<img src="yoda.jpg" alt="yoda">
+						<img src="luke.gif" alt="luke">
+					</div>
+				</div>					
+
+			</div>
+
+			<!--content 8 of 8 -->
+			<div id="content-seven" class="content">
+				<audio id="endroll">
+					  <source src="end.mp3" type="audio/mpeg">
+				</audio>
+				<h3>About</h3>
+				<p id="about"> The goal of this project is to teach a busy NYUAD students the names of major locations in the Huangpu district of Shanghai in just 5 minutes to aid their experience at the city for J-term or a semester abroad, as well as advising what learning approach best fits their personality. For Star Wars novices, this project will hopefully stir interest in the series and for Star Wars fans, the story will serve as another way to enjoy the saga. The user will have the option to go through five locations as Luke Skywalker, accompanied by the Jedi master Yoda and occasionally Master Obi Wan Kenobi. Yoda, depending on how the user respond to each of the location, will give you a customized advice on your cultural learning strategies at NYUSH.</p>
+				<p id="about"> The project is around 800 lines long in HTML, CSS, and JavaScript codes. Please feel free to reuse the code! The story dialogues were based on scenes from Star Wars: The Empire Strikes Back and the Return of Jedi. The Star Wars theme was adopted for this project as using well-known characters were necessary for a story so short. The main dialogues and the ending font was in Franklin Gothic Medium Cond font, while the opening font was in Pathway Gothic One. The decision buttons control logic variables which allows 16 different user-customized ending to be shown in the end. The fonts used in the project was also based on the actual star wars movies. The most challenging part of this project was not the technical issues behind programming, but was actually the process of crafting a dynamic story that ended with a meaningful point of reflection, as well as formulating effective puns. For future improvement, each scene will have better visuals including videos and sound effects. More importantly, the interactivity of the story will be enhanced by actually having the decision buttons influence the development of the story. In the name of gender equality, I probably should have made an option for female users to be able to play as a female character. This will involve creating a whole new plot, perhaps modeled after story lines of Leia Organa or Rey from the newest trilogy.</p>
+				<p id="about"> Created by Ken Iiyoshi January 2018. Special thanks to Professor Craig Protzel and my classmates from the Explorable Stories Class.</p>
+
+				<h3>Credits</h3>
+				<div>16Personalities: https://www.16personalities.com</div>
+				<div>Font used from Star Wars End Credi: http://thebrbforums.com/index.php?topic=464.0;wap2</div>
+				<div>Gin Bottle Image: https://www.healthline.com/hlcmsresource/images/cutting-back-on-booze-landscape.jpeg</div>
+				<div>Luke and Yoda GIF: https://favim.com/image/3949179/</div>
+				<div>Luke GIF: https://www.pinterest.co.uk/pin/416653403010948855/</div>
+				<div>Naan Image: http://www.taste.com.au/recipes/naan-bread-2/3ca735ae-42aa-4b30-bbef-4244a3064ded</div>
+				<div>Nanjing Lu Image: http://china.org.cn/living_in_china/spring-festival-2009/2009-01/13/content_17101587.htm</div>
+				<div>Star Wars Crawl Background Image: https://www.lego.com/en-us/starwars/activities/background/space-over-coruscant-9ce51204a6a248c399a00f9199d4126b</div>
+				<div>Star Wars Crawl Effect Sourcecode: https://css-tricks.com/snippets/css/star-wars-crawl-text/</div>
+				<div>Star Wars Episode 4 Tatooine Soundtrack:https://youtu.be/liVSa76Scck</div>
+				<div>Star Wars Episode 5 Soundtrack: https://youtu.be/nFdaRuKzjVo</div>
+				<div>Star Wars Episode 6 Soundtrack: https://youtu.be/4MAHgj4T-y0</div>
+				<div>Star Wars Moving Background: https://youtu.be/6MPJGaBHoOM</div>
+				<div>Shanghai Google Maps</div>
+				<div>Tianzifang Image: https://laviezine.com/991/top-shanghai-cycling-routes-exploring-shanghai-on-two-wheels/</div>
+				<div>Waitan Image: https://cdn.skyrisecities.com/sites/default/files/images/articles/2016/01/19191/19191-64750.jpg</div>
+				<div>Xintiandi Image: https://www.cool-cities.com/shanghai-tang--10155/</div>
+				<div>Yoda Force Image: http://knowledgeworks.org/worldoflearning/2017/05/growth-mindset-jedi-star-wars/</div>
+				<div>Yoda Image: http://www.starwars.com/news/7-of-yodas-greatest-moments</div>
+				<div>Yoda Wkipedia Page: https://en.wikipedia.org/wiki/Yoda</div>
+				<div>Yoda's Movie Dialogues: http://www.yodajeff.com/scripts/</div>
+				<div>Yuyuan Garden Image: http://www.chinadiscovery.com/shanghai/yu-garden.html</div>
+				<button class="button-decisions" id="button-back">Go back to start</button>
+			</div>
+		</div>
+		<!-- required for good animations -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="scripts.js"></script>
+		
+	</body>
+</html>
