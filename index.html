@@ -3,22 +3,35 @@
 	<head>
 		<meta charset="utf-8"/>
 		<!-- <meta name="viewport" content="width=device-width"> -->
-		<title>Ken Iiyoshi:GitHub Page</title>
+		<title>Ken Iiyoshi</title>
     <link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
-	<body>
+	<body align="center">
 		<!-- CONTENT GOES HERE -->
-		<div class="main-container">
-        <div class="title">Ken Iiyoshi:GitHub Page</div>
-        <div class="text">I put my interactive projects here. Please see keniiyoshi.com for my full portfolio.</div>
-        <div class="image-buttons"></div>
-					<div class="text">Learning jQuery - An Excercise for Engineering Capstone Project</div>
-					<a href="./jQuery_learning/index.html"><img width="400" height="200" src="./jQuery_learning/jquery-logo-blue.png" alt="Xio Long Bao"></a>
-					<div class="text">January 2018 - Explorable Stories</div>
-					<a href="./explorables/index.html"><img width="400" height="200" src="./explorables/new_nyush.jpg" alt="jQuery Logo Blue"></a>
-				</div>
-		<!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
-		<!--<script src="scripts.js"></script>-->
+    <h1 class="title">Ken Iiyoshi's GitHub Page</h1>
+		<br>
+		<div class="text">
+			This page is a collection of my interactive projects. It complements
+			<a href="https://www.keniiyoshi.com">keniiyoshi.com</a>
+			, which contains my full portfolio.
+		</div>
+    <div class="image-buttons"></div>
+			<h2 class="text">jQuery Excercise for Engineering Capstone Project</h2>
+			<br>
+			<a href="./jQuery_learning/index.html"><img width="400" height="200" src="./jQuery_learning/jquery-logo-blue.png" alt="Xio Long Bao"></a>
+			<h2 class="text">January 2018 - Explorable Stories</h2>
+			<br>
+			<a href="./explorables/index.html"><img width="400" height="200" src="./explorables/new_nyush.jpg" alt="jQuery Logo Blue"></a>
+
+		<!-- JavaScript Code -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="scripts.js"></script>
+		<script>
+      // I like how jQuery needs only a few lines to make indentations.
+      var leftmargin = 10;
+      $(".main-container").css("margin-left", leftmargin);
+
+    </script>
 	</body>
 </html>

@@ -13,33 +13,46 @@
 </head>
 <body>
 
-    <h1>Learning jQuery - An Excercise for Engineering Capstone Project</h1>
-    <a href="https://www.linkedin.com/learning/jquery-essential-training-2?u=2131553">jQuery Essential Training: From LinkedIn Learning</a>
-    <div class="main-container">
-      <div class="text">Chp. 1</div>
-      <a href="./lessons/Ch_1/FirstjQueryPage_finished.html"><div class="text">First jQuery Page</div></a>
-      <a href="./lessons/Ch_1/AJAX_intro.html"><div class="text">AJAX intro</div></a>
-      <div class="text">For offline access of all files:</div>
-      <a href="./lessons"><div class="text">File tree</div></a>
-      <div class="text">Official jQuery Site:</div>
-      <a href="http://jquery.com/">jQuery</a>
+    <h1>jQuery Excercises for Engineering Capstone Project</h1>
+    <br>
+    <div class="main">
+      Source:
+      <a href="https://www.linkedin.com/learning/jquery-essential-training-2?u=2131553">
+        jQuery Essential Training: From LinkedIn Learning
+      </a>
     </div>
-
-
+    <div class="main-container">
+      <div class="chapter">Chp. 1
+        <a href="./lessons/Ch_1/FirstjQueryPage_finished.html"><div class="text">First jQuery Page</div></a>
+        <a href="./lessons/Ch_1/SelectFilter_intro.htm"><div class="text">Select Filter intro</div></a>
+        <a href="./lessons/Ch_1/Animations_intro.html"><div class="text">Animations intro</div></a>
+        <a href="./lessons/Ch_1/AJAX_intro.html"><div class="text">AJAX intro</div></a>
+      </div>
+      <div class="chapter">Chp. 2
+        <a href="./lessons/Ch_2/BasicSelectors_finished.htm"><div class="text">Basic Selectors</div></a>
+        <a href="./lessons/Ch_2/BasicFilters_finished.html"><div class="text">Basic Filters</div></a>
+        <a href="./lessons/Ch_2/HierCombo_finished.html"><div class="text">Hierarchy Selectors</div></a>
+        <a href="./lessons/Ch_2/AttrFilters_finished.html"><div class="text">Attribute Filters</div></a>
+        <a href="./lessons/Ch_2/ChildVisCont_finished.html"><div class="text">Using Child, Visibility, and Content Filters</div></a>
+        <a href="./lessons/Ch_2/traversing_finished.html"><div class="text">Using jQuery Document Traversal Features</div></a>
+        <a href="./lessons/HPlusSport_Finished/index.html"><div class="text">Dynamic Coding Challenge 1</div></a>
+      </div>
+      <div class="chapter">Chp. 3
+        <a href="./lessons/Ch_3/creating_finished.htm"><div class="text">Creating New Content</div></a>
+      </div>
+      <div class="chapter">For offline access of all files:
+      <a href="./lessons"><div class="text">File tree</div></a>
+      </div>
+    </div>
+    <div class="chapter">Official jQuery Site:
+    <a href="http://jquery.com/"><div class="text">jQuery</div></a>
+    </div>
     <script src="jquery-3.4.1.js"></script>
     <script>
-    // $( document ).ready(function() {
-    //   $( "a" ).click(function( event ) {
-    //     event.preventDefault();
-    //     $( this ).hide( "slow" );
-    //   });
-    // $( "a" ).click(function( event ) {
-    //     alert( "The link will no longer take you to jquery.com" );
-    //     event.preventDefault();
-    //
-    // });
-    });
-    // Your code goes here.
+      // I like how jQuery needs only a few lines to make indentations.
+      var leftmargin = 10;
+      $(".main-container").css("margin-left", leftmargin);
+      $(".chapter").children().children().css("margin-left", leftmargin);
 
     </script>
 
