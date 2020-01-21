@@ -1,13 +1,72 @@
 body{
-  font-family: Arial;
-  display: inline-block;
-  padding: 0; margin: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.4em;
+    background: white;
+    font-family:  Arial;
 }
 
-h1{
-  text-align: center;
+h2{
+    /* margin-bottom: 4vmax; */
 }
 
+
+.blog-post{
+    align-content: center;
+    width: 90vw;
+    margin: auto;
+    background: white;
+    margin-top: 1vmax;
+    border-right: 1vmax;
+    border-left: 1vmax;
+    margin-bottom: 2em;
+    padding-top: 2vmax;
+    padding-right: 2vmax;
+    padding-left: 2vmax;
+    padding-bottom: 2vmax;
+    box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.3);
+}
+
+.blog-content{
+    font-size: 0.9em;
+}
+
+
+.blog-title{
+    /* text-align: center; */
+
+    font-size: 2.5em;
+    font-weight: lighter;
+    margin-top: 5px;
+}
+
+.date{
+    /* text-align: center; */
+    font-family: 'KoPub Batang';
+
+    font-size: 1em;
+    font-weight: 100;
+    color: #9C9C9C;
+    /*text-decoration: blink;*/
+    text-decoration-color: currentColor;
+}
+
+
+/* Ken - from jQuery training CSS */
+body > h1 {
+    text-align: center;
+    background-color: #33d;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    margin:0;
+    padding-left: 10pt;
+    padding-right: 10pt;
+    padding-top:25pt;
+    padding-bottom: 15pt;
+    box-shadow: 0px 5px 5px 0px rgba(171,171,171,1);
+}
 
 .my-div{
   color: purple;
@@ -26,4 +85,3 @@ canvas{
 	display: block;
 	margin: 20px auto;
 }
-
