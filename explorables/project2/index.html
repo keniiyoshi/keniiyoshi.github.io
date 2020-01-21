@@ -8,16 +8,18 @@
 	</head>
 	<body>
 		<!-- background video: -->
-		<video id="video_background" width=100% height=100% autoplay muted loop>
-		  <source src="backgroundvideo.mp4" type="video/mp4">
-		</video>
+		<div class="video-container">
+			<video id="video_background"  autoplay muted loop>
+			  <source src="backgroundvideo.mp4" type="video/mp4">
+			</video>
+		</div>
 
 		</div>
 			<!--content 1 of 8 -->
 			<div id="content-zero" class="content">
 				<!-- Audio for intro -->
 				<audio id="intro">
-				  <source src="intro.mp3" type="audio/mpeg">
+				  <source src="./audio/intro.mp3" type="audio/mpeg">
 				</audio>
 				<!-- star wars crawl effect -->
 				<div class="starwars">
@@ -28,7 +30,7 @@
 					      <p>Episode NYUAD</p>
 					      <h1>HUANGPU AWAKENS</h1>
 						    </div>
-						    <p>It is a period of study abroad. Luke Skywalker, escaping from Saadiyat Island, has won his NYUSH study away.</p>     
+						    <p>It is a period of study abroad. Luke Skywalker, escaping from Saadiyat Island, has won his NYUSH study away.</p>
 						    <p>During the escape, Obi Wan Kenobi instructs Luke to train under the retired Jedi master, Yoda, who possesses the memory skills necessary to remember important location names in Shanghai.</p>
 						    <p>Pursued by the boredom of packing, Luke races to Huangpu aboard his X-Wing, the central district in Shanghai where Yoda resides in.</p>
 							 </div>
@@ -38,13 +40,13 @@
 			</div>
 
 			<!--content 2 of 8 -->
-			<div id="content-one" class="content">			    			
+			<div id="content-one" class="content">
 				<audio id="tatooine">
-					  <source src="tatooineshort.mp3" type="audio/mpeg">
+					  <source src="./audio/tatooineshort.mp3" type="audio/mpeg">
 					</audio>
 				<div class="row">
 					<div class="column">
-					  	<img src="xwing.png" alt="xwing">
+					  	<img src="./img/xwing.png" alt="xwing">
 					  	<div id="you" class="you">You: My X-wing landed on Huangpu river, which is in the Huangpu district of Shanghai. Wow! The skyscrapers on the eastern side looks amazing! Now all I have to do is find this Yoda... if he even exists. Still... there's something familiar about this place. I feel like... like I'm being watched!</div>
 						<div id="yoda" class="yoda">Yoda: Away with your weapon! I mean you no harm. What makes a young warrior come here?</div>
 						<div id="you" class="you">You: I'm looking for a Jedi Master.</div>
@@ -57,17 +59,17 @@
 						<button class="button-decisions" id="button-continue">Continue</button>
 					</div>
 					<div class="column">
-						<img src="waitanmap.png" alt="waitan map">
-						<img src="waitan.jpg" alt="waitan">		
+						<img src="./img/waitanmap.png" alt="waitan map">
+						<img src="./img/waitan.jpg" alt="waitan">
 					</div>
 				</div>
-				
+
 			</div>
 
 			<!--content 3 of 8 -->
 			<div id="content-two" class="content">
 					<audio id="revealed">
-					  <source src="revealed.mp3" type="audio/mpeg">
+					  <source src="./audio/revealed.mp3" type="audio/mpeg">
 					</audio>
 				<div class="row">
 					<div class="column">
@@ -90,8 +92,8 @@
 						<video id="ready" width=95% height=95% autoplay muted loop><source src="ready.mp4" type="video/mp4"></video>
 					</div>
 					<div class="column">
-						<img src="tianzifangmap.png" alt="tianzifang map">
-						<img src="tianzifang.jpg" alt="tianzifang">
+						<img src="./img/tianzifangmap.png" alt="tianzifang map">
+						<img src="./img/tianzifang.jpg" alt="tianzifang">
 					</div>
 				</div>
 
@@ -100,7 +102,7 @@
 			<!--content 4 of 8 -->
 			<div id="content-three" class="content">
 					<audio id="training">
-					  <source src="training.mp3" type="audio/mpeg">
+					  <source src="./audio/training.mp3" type="audio/mpeg">
 					</audio>
 				<div class="row">
 					<div class="column">
@@ -115,12 +117,12 @@
 						<div id="you">You: (The X-wing won't budge... it's too big (hm... study-away essays)... I should:)</div>
 						<button class="button-decisions" id="button-S"> keep pretending that I know what I'm doing.</button>
 						<button class="button-decisions" id="button-N"> tell master that this is simply impossible.</button>
-						<img src="naan.jpg" alt="naan">
+						<img src="./img/naan.jpg" alt="naan">
 					</div>
 					<div class="column">
-						<img src="nanjinglumap.png" alt="nanjinglu map">
-						<img src="nanjingroad.jpg" alt="nanjingroad">
-						<img src="gin.jpg" alt="gin">
+						<img src="./img/nanjinglumap.png" alt="nanjinglu map">
+						<img src="./img/nanjingroad.jpg" alt="nanjingroad">
+						<img src="./img/gin.jpg" alt="gin">
 					</div>
 				</div>
 			</div>
@@ -128,11 +130,11 @@
 			<!--content 5 of 8 -->
 			<div id="content-four" class="content">
 				<audio id="lift">
-				  <source src="yoda.mp3" type="audio/mpeg">
+				  <source src="./audio/oda.mp3" type="audio/mpeg">
 				</audio>
 				<div class="row">
 				<div class="column">
-					<img src="yoda.gif" alt="yoda.gif">
+					<img src="./img/yoda.gif" alt="yoda.gif">
 					<div id="you">You: ...I can't believe.</div>
 					<div id="yoda">Yoda: That is why you procrastinate. Take rest, we shall. Fly us to Yuyuan. Train your logic skills, you need to. A nice garden meansr a nice game of Chinese chess. Let's play young Skywalker. </div>
 					<div id="you">You: Ok!</div>
@@ -146,8 +148,8 @@
 					<button class="button-decisions" id="button-F">intentionally lose. I don't want to make master feel old.</button>
 					</div>
 				<div class="column">
-					<img src="yuyuanmap.png" alt="yuyuan map">
-					<img src="yuyuan.jpg" alt="yuyuan">
+					<img src="./img/yuyuanmap.png" alt="yuyuan map">
+					<img src="./img/yuyuan.jpg" alt="yuyuan">
 				</div>
 				</div>
 			</div>
@@ -155,7 +157,7 @@
 			<!--content 6 of 8 -->
 			<div id="content-five" class="content">
 				<audio id="seeing">
-				  <source src="victory.mp3" type="audio/mpeg">
+				  <source src="./audio/victory.mp3" type="audio/mpeg">
 				</audio>
 				<div class="row">
 					<div class="column">
@@ -167,7 +169,7 @@
 						<div id="you">You: FoS... Data Structures...They were in pain.</div>
 						<div id="yoda">Yoda: is the future you see.</div>
 						<div id="you">You: ...I've got to go to them.</div>
-						<div id="yoda">Yoda: Decide you must how to serve them best. If you leave now, help them you could. But you would spoil them, destroying all for which they have fought and suffered...OW!</div>					
+						<div id="yoda">Yoda: Decide you must how to serve them best. If you leave now, help them you could. But you would spoil them, destroying all for which they have fought and suffered...OW!</div>
 						<div id="you">You: Are you ok master!?</div>
 						<div id="yoda">Yoda: Yes yes fine, I am. On that chair, I hit my shin... I want more tea. Handy, it will be. </div>
 						<div id="you">You: (God damm it why is he obsessed with puns) Shin, tea, handy. I get it master.</div>
@@ -179,8 +181,8 @@
 						<button class="button-decisions" id="button-J"> advise Han and Leia to get help from the ARC.</button>
 					</div>
 					<div class="column">
-						<img src="xintiandimap.png" alt="xintiandi map">
-						<img src="xintiandi.jpg" alt="xintiandi">
+						<img src="./img/xintiandimap.png" alt="xintiandi map">
+						<img src="./img/xintiandi.jpg" alt="xintiandi">
 					</div>
 				</div>
 			</div>
@@ -188,7 +190,7 @@
 			<!--content 7 of 8 -->
 			<div id="content-six" class="content">
 				<audio id="throneroom">
-					  <source src="throneroom.mp3" type="audio/mpeg">
+					  <source src="./audio/throneroom.mp3" type="audio/mpeg">
 					</audio>
 				<div class="row">
 					<div class="column">
@@ -235,17 +237,17 @@
 						<button class="button-decisions" id="button-aboutcredit">Finish!</button>
 						</div>
 					<div class="column">
-						<img src="yoda.jpg" alt="yoda">
-						<img src="luke.gif" alt="luke">
+						<img src="./img/yoda.jpg" alt="yoda">
+						<img src="./img/luke.gif" alt="luke">
 					</div>
-				</div>					
+				</div>
 
 			</div>
 
 			<!--content 8 of 8 -->
 			<div id="content-seven" class="content">
 				<audio id="endroll">
-					  <source src="end.mp3" type="audio/mpeg">
+					  <source src="./audio/end.mp3" type="audio/mpeg">
 				</audio>
 				<h3>About</h3>
 				<p id="about"> The goal of this project is to teach a busy NYUAD students the names of major locations in the Huangpu district of Shanghai in just 5 minutes to aid their experience at the city for J-term or a semester abroad, as well as advising what learning approach best fits their personality. For Star Wars novices, this project will hopefully stir interest in the series and for Star Wars fans, the story will serve as another way to enjoy the saga. The user will have the option to go through five locations as Luke Skywalker, accompanied by the Jedi master Yoda and occasionally Master Obi Wan Kenobi. Yoda, depending on how the user respond to each of the location, will give you a customized advice on your cultural learning strategies at NYUSH.</p>
@@ -279,8 +281,8 @@
 			</div>
 		</div>
 		<!-- required for good animations -->
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="scripts.js"></script>
-		
+
 	</body>
 </html>

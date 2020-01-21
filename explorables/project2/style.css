@@ -4,40 +4,67 @@ body{
 	/*font-size based on viewport-percentage width*/
 	font-size: 1.6vw;
 	font-family: 'Franklin Gothic Medium Cond', sans-serif;
+	background-color: black;
 	background-image: url("crawlbackground.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	text-align: center;
-	opacity: 0;	
+	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 	
+	animation-duration: 600s;
 }
 
 /*for background video*/
 #video_background{
 	position: absolute;
-    left: 0px;
-    top: 0px;
+  left: 0px;
+  top: 0px;
 	opacity: 0.5;
 	z-index: -1;
+}
+
+/* Ken - fits video to screen of any size */
+.video-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-container video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  /* width: auto; */
+  /* height: auto; */
+
+  /* Center the video */
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%); */
 }
 
 img{
 	width: 95%;
 	height: 95%;
 	display: inline-block;
-	opacity: 0;	
+	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 	
+	animation-duration: 600s;
 }
 
 /*for 2 column formatting*/
 .column {
     float: left;
     width: 50%;
-    opacity: 0;	
+    opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 
+	animation-duration: 600s;
 }
 
 /*button on the first page*/
@@ -55,9 +82,9 @@ img{
     bottom: 0;
     text-align: center
 	z-index: 1;
-	opacity: 0;	
+	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 	
+	animation-duration: 600s;
 }
 
 .button-beginning:hover{
@@ -75,9 +102,9 @@ img{
 	margin: 10 %;
 	/*light sky blue color*/
 	background-color: rgb(135,206,250);
-  	opacity: 0;	
+  	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 	
+	animation-duration: 600s;
 }
 
 .button-decisions:hover{
@@ -93,23 +120,23 @@ img{
 /*the folllowing 3 blocks define properties for dialogues*/
 #you{
 	color: lightblue;
-	opacity: 0;	
+	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 
+	animation-duration: 600s;
 }
 
 #yoda{
 	color: green;
-	opacity: 0;	
-	animation-name: fadeInOut; 
-	animation-duration: 600s; 	
+	opacity: 0;
+	animation-name: fadeInOut;
+	animation-duration: 600s;
 }
 
 #ben{
-	color: magenta;	
-	opacity: 0;	
+	color: magenta;
+	opacity: 0;
 	animation-name: fadeInOut;
-	animation-duration: 600s; 	
+	animation-duration: 600s;
 }
 
 /*starwars crawl css*/
@@ -147,9 +174,9 @@ img{
   line-height: 150%;
   perspective: 400px;
   text-align: justify;
-  opacity: 0;	
+  opacity: 0;
   animation-name: fadeInOut;
-  animation-duration: 600s; 	
+  animation-duration: 600s;
 }
 
 .crawl {
@@ -175,7 +202,7 @@ img{
     top: -100px;
     transform: rotateX(20deg)  translateZ(0);
   }
-    100% { 
+    100% {
     /*speed of scrolling?*/
     top: -6000px;
     /*speed of going back*/
