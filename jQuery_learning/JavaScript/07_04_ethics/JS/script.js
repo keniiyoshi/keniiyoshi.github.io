@@ -7,7 +7,7 @@ ALERT.classList.add("hide");
 function reveal(e,current) {
     e.preventDefault();
 
-    current.innerHTML == "Inspirational Talks" ? CTA.innerHTML = "Thanks!" : CTA.innerHTML = "Inspirational Talks";
+    current.innerHTML == "Resources" ? CTA.innerHTML = "Thanks!" : CTA.innerHTML = "Resources";
 
     ALERT.classList.toggle("hide");
 }
