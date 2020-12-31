@@ -23,20 +23,25 @@
     </div>
     <div class="main-container">
       <div class="chapter">Chp. 1
-        <a href="./lessons/Ch_1/FirstjQueryPage_finished.html"><div class="text">First jQuery Page</div></a>
-        <a href="./lessons/Ch_1/SelectFilter_intro.htm"><div class="text">Select Filter intro</div></a>
-        <a href="./lessons/Ch_1/CreateChange_intro.html"><div class="text">Creating and Modifying Page Content</div></a>
-        <a href="./lessons/Ch_1/Events_intro.html"><div class="text">Events intro</div></a>
-        <a href="./lessons/Ch_1/Animations_intro.html"><div class="text">Animating Page Content</div></a>
-        <a href="./lessons/Ch_1/AJAX_intro.html"><div class="text">AJAX intro</div></a>
+        <a id="toggle" href="#" class="hide">expand</a>
+        <section id="subchapter">
+          <a href="./lessons/Ch_1/FirstjQueryPage_finished.html"><div class="text">First jQuery Page</div></a>
+          <a href="./lessons/Ch_1/SelectFilter_intro.htm"><div class="text">Select Filter intro</div></a>
+          <a href="./lessons/Ch_1/CreateChange_intro.html"><div class="text">Creating and Modifying Page Content</div></a>
+          <a href="./lessons/Ch_1/Events_intro.html"><div class="text">Events intro</div></a>
+          <a href="./lessons/Ch_1/Animations_intro.html"><div class="text">Animating Page Content</div></a>
+          <a href="./lessons/Ch_1/AJAX_intro.html"><div class="text">AJAX intro</div></a>
+        </section>
       </div>
       <div class="chapter">Chp. 2
-        <a href="./lessons/Ch_2/BasicSelectors_finished.htm"><div class="text">Basic Selectors</div></a>
-        <a href="./lessons/Ch_2/BasicFilters_finished.html"><div class="text">Basic Filters</div></a>
-        <a href="./lessons/Ch_2/HierCombo_finished.html"><div class="text">Hierarchy Selectors</div></a>
-        <a href="./lessons/Ch_2/AttrFilters_finished.html"><div class="text">Attribute Filters</div></a>
-        <a href="./lessons/Ch_2/ChildVisCont_finished.html"><div class="text">Using Child, Visibility, and Content Filters</div></a>
-        <a href="./lessons/Ch_2/traversing_finished.html"><div class="text">Using jQuery Document Traversal Features</div></a>
+        <a id="toggle2" href="#" class="hide">expand</a>
+        <section id="subchapter2"><a href="./lessons/Ch_2/BasicSelectors_finished.htm"><div class="text">Basic Selectors</div></a>
+          <a href="./lessons/Ch_2/BasicFilters_finished.html"><div class="text">Basic Filters</div></a>
+          <a href="./lessons/Ch_2/HierCombo_finished.html"><div class="text">Hierarchy Selectors</div></a>
+          <a href="./lessons/Ch_2/AttrFilters_finished.html"><div class="text">Attribute Filters</div></a>
+          <a href="./lessons/Ch_2/ChildVisCont_finished.html"><div class="text">Using Child, Visibility, and Content Filters</div></a>
+          <a href="./lessons/Ch_2/traversing_finished.html"><div class="text">Using jQuery Document Traversal Features</div></a>
+        </section>
       </div>
       <div class="chapter">Chp. 3
         <a href="./lessons/Ch_3/creating_finished.htm"><div class="text">Creating New Content</div></a>
@@ -107,6 +112,40 @@
 
     <script src="jquery-3.4.1.js"></script>
     <script>
+      const CTA = document.querySelector(".chapter #toggle");
+      const ALERT = document.querySelector("#subchapter");
+
+      CTA.classList.remove("hide");
+      ALERT.classList.add("hide");
+
+      function reveal(e,current) {
+          e.preventDefault();
+
+          current.innerHTML == "expand" ? CTA.innerHTML = "collapse" : CTA.innerHTML = "expand";
+
+          ALERT.classList.toggle("hide");
+      }
+
+      CTA.addEventListener('click', function(e){ reveal(e,this); }, false);
+      CTA.addEventListener('click', function(){console.log("The button was clicked!")},false);
+
+      const CTA2 = document.querySelector(".chapter #toggle2");
+      const ALERT2 = document.querySelector("#subchapter2");
+
+      CTA2.classList.remove("hide");
+      ALERT2.classList.add("hide");
+
+      function reveal2(e,current) {
+          e.preventDefault();
+
+          current.innerHTML == "expand" ? CTA2.innerHTML = "collapse" : CTA2.innerHTML = "expand";
+
+          ALERT2.classList.toggle("hide");
+      }
+
+      CTA2.addEventListener('click', function(e){ reveal2(e,this); }, false);
+      CTA2.addEventListener('click', function(){console.log("The button was clicked!")},false);
+
       // I like how jQuery needs only a few lines to make indentations.
       var leftmargin = 10;
       $(".main-container").css("margin-left", leftmargin);
