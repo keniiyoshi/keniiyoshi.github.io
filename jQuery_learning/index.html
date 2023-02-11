@@ -112,11 +112,16 @@
 
     <script src="jquery-3.4.1.js"></script>
     <script>
+      window.confirm("Proceed?");
       const CTA = document.querySelector(".chapter #toggle");
+      const CTA2 = document.querySelector(".chapter #toggle2");
       const ALERT = document.querySelector("#subchapter");
+      const ALERT2 = document.querySelector("#subchapter2");
 
       CTA.classList.remove("hide");
+      CTA2.classList.remove("hide");
       ALERT.classList.add("hide");
+      ALERT2.classList.add("hide");
 
       function reveal(e,current) {
           e.preventDefault();
@@ -126,15 +131,6 @@
           ALERT.classList.toggle("hide");
       }
 
-      CTA.addEventListener('click', function(e){ reveal(e,this); }, false);
-      CTA.addEventListener('click', function(){console.log("The button was clicked!")},false);
-
-      const CTA2 = document.querySelector(".chapter #toggle2");
-      const ALERT2 = document.querySelector("#subchapter2");
-
-      CTA2.classList.remove("hide");
-      ALERT2.classList.add("hide");
-
       function reveal2(e,current) {
           e.preventDefault();
 
@@ -143,8 +139,8 @@
           ALERT2.classList.toggle("hide");
       }
 
+      CTA.addEventListener('click', function(e){ reveal(e,this); }, false);
       CTA2.addEventListener('click', function(e){ reveal2(e,this); }, false);
-      CTA2.addEventListener('click', function(){console.log("The button was clicked!")},false);
 
       // I like how jQuery needs only a few lines to make indentations.
       var leftmargin = 10;
