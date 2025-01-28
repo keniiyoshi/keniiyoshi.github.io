@@ -1,24 +1,7 @@
-var bgImage;
-var characterImage;
-var mochiImage;
-var dumplingImage;
-
-var theSoup;
-var theDumplings;
-
-var total = 10;
-var timeLimit = 10;
-var timer = 0;
-
-var x = 0;
-var y = 0;
-var angle = 0;
-var speedX = 3;
-var speedY = 3;
-
-var moving = false;
-var winner = false;
-var gameOver = false;
+let bgImage, characterImage, mochiImage, dumplingImage;
+let theSoup, theDumplings;
+let total = 10, timeLimit = 10, timer = 0, x = 0, y = 0, angle = 0, speedX = 3, speedY = 3;
+let moving = false, winner = false, gameOver = false;
 
 function preload() {
   bgImage = loadImage('starwars.png');
@@ -27,10 +10,16 @@ function preload() {
   dumplingImage = loadImage('dumpling.png');
 }
 
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  [characterImage, dumplingImage, mochiImage].forEach(img => img.resize(img.width / (img === mochiImage ? 10 : img === dumplingImage ? 3 : 5), 0));
+  initGame();
+}
+
 function initGame() {
   theDumplings = new Group();
-  for (var i = 0; i < total; i++) {
-    var oneDumpling = createSprite(random(0, width), random(0, height));
+  for (let i = 0; i < total; i++) {
+    let oneDumpling = createSprite(random(0, width), random(0, height));
     oneDumpling.addImage(dumplingImage);
     theDumplings.add(oneDumpling);
   }
@@ -38,130 +27,74 @@ function initGame() {
   theSoup.addImage(characterImage);
 }
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(255, 180, 255);
-
-  characterImage.resize(characterImage.width / 5, characterImage.height / 5);
-  dumplingImage.resize(dumplingImage.width / 3, dumplingImage.height / 3);
-  mochiImage.resize(mochiImage.width / 10, mochiImage.height / 10);
-  initGame();
-}
-
 function draw() {
   background(bgImage);
-
-  if (gameOver || winner) {
-    displayEndScreen();
-  } else {
-    handleGameplay();
-    drawOrbitingMochis();
-  }
+  gameOver || winner ? displayEndScreen() : handleGameplay();
 }
 
 function displayEndScreen() {
   fill(255);
   textAlign(CENTER);
   textSize(46);
-  if (gameOver) {
-    text("SORRY", width / 2, 80);
-  } else if (winner) {
-    text("WINNER", width / 2, 80);
-  }
+  text(gameOver ? "SORRY" : "WINNER", width / 2, 80);
   textSize(24);
   text("Click mouse to restart", width / 2, 120);
 }
 
 function handleGameplay() {
-  theSoup.position.x = mouseX;
-  theSoup.position.y = mouseY;
+  theSoup.position.set(mouseX, mouseY);
   noCursor();
-
-  theSoup.overlap(theDumplings, makeDisappear);
+  theSoup.overlap(theDumplings, (_, target) => target.remove());
   drawSprites();
+  updateTimer();
+  drawOrbitingMochis();
+}
 
+function updateTimer() {
   timer++;
-  var curTime = timeLimit - floor(timer / 60);
+  let curTime = timeLimit - floor(timer / 60);
   fill(255);
   textAlign(CENTER);
   textSize(46);
   text(curTime, width / 2, height - 60);
-
-  if (theDumplings.length === 0) {
-    winner = true;
-  }
-  if (curTime === 0) {
-    gameOver = true;
-  }
+  if (!theDumplings.length) winner = true;
+  if (curTime === 0) gameOver = true;
 }
 
 function drawOrbitingMochis() {
-  if (x>width || x<0){
-    speedX = speedX * -1;
-  }
-  if (y>height || y<0){
-    speedY = speedY * -1;
-  }
-  x = x + speedX;
-  y = y + speedY; 
+  [x, y] = [x + speedX, y + speedY];
+  if (x > width || x < 0) speedX *= -1;
+  if (y > height || y < 0) speedY *= -1;
 
+  let offsets = [-1, 1];
+  offsets.forEach(offsetX => {
+    offsets.forEach(offsetY => {
+      let dx = 100 * sqrt(1 - pow(sin(angle / 50), 2)) * offsetX;
+      let dy = 100 * sqrt(1 - pow(cos(angle / 50), 2)) * offsetY;
+      image(mochiImage, x + dx - mochiImage.width / 2, y + dy - mochiImage.height / 2);
+    });
+  });
   image(mochiImage, x - mochiImage.width / 2, y - mochiImage.height / 2);
-  image(
-    mochiImage,
-    x - 100 * sqrt(1 - pow(sin(angle / 50), 2)) - mochiImage.width / 2,
-    y - 100 * sqrt(1 - pow(cos(angle / 50), 2)) - mochiImage.height / 2
-  );
-  image(
-    mochiImage,
-    x + 100 * sqrt(1 - pow(sin(angle / 50), 2)) - mochiImage.width / 2,
-    y + 100 * sqrt(1 - pow(cos(angle / 50), 2)) - mochiImage.height / 2
-  );
-  image(
-    mochiImage,
-    x - 100 * sqrt(1 - pow(sin(angle / 50), 2)) - mochiImage.width / 2,
-    y + 100 * sqrt(1 - pow(cos(angle / 50), 2)) - mochiImage.height / 2
-  );
-  image(
-    mochiImage,
-    x + 100 * sqrt(1 - pow(sin(angle / 50), 2)) - mochiImage.width / 2,
-    y - 100 * sqrt(1 - pow(cos(angle / 50), 2)) - mochiImage.height / 2
-  );
-
-  angle += 1;
-}
-
-function makeDisappear(collider, target) {
-  console.log("Collision!");
-  target.remove();
+  angle++;
 }
 
 function mousePressed() {
-  if (winner || gameOver) {
-    resetGame();
-  } else {
-    moving = !moving;
-  }
+  winner || gameOver ? resetGame() : moving = !moving;
 }
 
 function resetGame() {
-  winner = false;
-  gameOver = false;
-  timer = 0;
-
+  [winner, gameOver, timer] = [false, false, 0];
   theDumplings.removeSprites();
   theSoup.remove();
-
-  total = total * 1.5;
+  total *= 1.5;
   timer = timeLimit * 0.5;
   initGame();
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    speedX *= 0.9;
-    speedY *= 0.9;
-  } else if (keyCode === RIGHT_ARROW) {
-    speedX *= 1.1;
-    speedY *= 1.1;
+  if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+    let factor = keyCode === LEFT_ARROW ? 0.9 : 1.1;
+    speedX *= factor;
+    speedY *= factor;
   }
 }
