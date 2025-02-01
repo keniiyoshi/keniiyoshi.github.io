@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Adventure Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+        #gameCanvas {
+            border: 2px solid #333;
+        }
+        .game-container {
+            text-align: center;
+        }
+        #controls {
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div id="controls">
+            Use Arrow Keys to Move | Space to Attack
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Character properties
+        const SPRITE_WIDTH = 32;
+        const SPRITE_HEIGHT = 32;
+        const SCALE = 3;
+        const SCALED_WIDTH = SPRITE_WIDTH * SCALE;
+        const SCALED_HEIGHT = SPRITE_HEIGHT * SCALE;
+
+        // Player state
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            speed: 5,
+            direction: 'down',
+            frameX: 0,
+            frameY: 0,
+            moving: false,
+            attacking: false
+        };
+
+        // Load images
+        const playerSprite = new Image();
+        playerSprite.src = 'spritesheet.png';
+        
+        const background = new Image();
+        background.src = 'background.png';
+
+        // Animation frames
+        let frameCount = 0;
+        const FRAME_LIMIT = 8;
+
+        // Keyboard state
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            Space: false
+        };
+
+        // Event listeners
+        window.addEventListener('keydown', (e) => {
+            if (keys.hasOwnProperty(e.code)) {
+                keys[e.code] = true;
+                player.moving = true;
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.code)) {
+                keys[e.code] = false;
+                player.moving = false;
+            }
+        });
+
+        function updatePlayer() {
+            // Movement
+            if (keys.ArrowUp) {
+                player.y -= player.speed;
+                player.direction = 'up';
+                player.frameY = 3;
+            }
+            if (keys.ArrowDown) {
+                player.y += player.speed;
+                player.direction = 'down';
+                player.frameY = 0;
+            }
+            if (keys.ArrowLeft) {
+                player.x -= player.speed;
+                player.direction = 'left';
+                player.frameY = 1;
+            }
+            if (keys.ArrowRight) {
+                player.x += player.speed;
+                player.direction = 'right';
+                player.frameY = 2;
+            }
+            if (keys.Space) {
+                player.attacking = true;
+                player.frameY = 4; // Attack animation row
+            }
+
+            // Animation
+            if (player.moving) {
+                frameCount++;
+                if (frameCount >= FRAME_LIMIT) {
+                    frameCount = 0;
+                    player.frameX = (player.frameX + 1) % 4;
+                }
+            }
+
+            // Boundary checking
+            player.x = Math.max(0, Math.min(canvas.width - SCALED_WIDTH, player.x));
+            player.y = Math.max(0, Math.min(canvas.height - SCALED_HEIGHT, player.y));
+        }
+
+        function drawGame() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background
+            ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+            // Draw player
+            ctx.drawImage(
+                playerSprite,
+                player.frameX * SPRITE_WIDTH,
+                player.frameY * SPRITE_HEIGHT,
+                SPRITE_WIDTH,
+                SPRITE_HEIGHT,
+                player.x,
+                player.y,
+                SCALED_WIDTH,
+                SCALED_HEIGHT
+            );
+        }
+
+        function gameLoop() {
+            updatePlayer();
+            drawGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game when images are loaded
+        Promise.all([
+            new Promise(resolve => playerSprite.onload = resolve),
+            new Promise(resolve => background.onload = resolve)
+        ]).then(() => {
+            gameLoop();
+        });
+    </script>
+</body>
+</html>
