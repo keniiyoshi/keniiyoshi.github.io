@@ -1,0 +1,67 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochi & Chestnut’s Culinary Quest</title>
+    <style>
+        body { background-color: #f8d7da; text-align: center; font-family: Arial, sans-serif; }
+        canvas { background-color: #fff0f5; border: 2px solid #000; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🍓 Mochi & Chestnut’s Culinary Quest 🍜</h1>
+    <p>Move with Arrow Keys (Mochi) and WASD (Chestnut). Collect ingredients & cook!</p>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const player1 = { x: 100, y: 100, color: "pink", name: "Mochi" };
+        const player2 = { x: 200, y: 100, color: "brown", name: "Chestnut" };
+        let ingredients = [{ x: 300, y: 300, name: "Sugar" }, { x: 500, y: 200, name: "Flour" }];
+
+        function drawPlayer(player) {
+            ctx.fillStyle = player.color;
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, 20, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = "black";
+            ctx.fillText(player.name, player.x - 15, player.y - 25);
+        }
+
+        function drawIngredients() {
+            ctx.fillStyle = "gold";
+            ingredients.forEach(item => {
+                ctx.fillRect(item.x, item.y, 10, 10);
+                ctx.fillText(item.name, item.x - 10, item.y - 10);
+            });
+        }
+
+        function updateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer(player1);
+            drawPlayer(player2);
+            drawIngredients();
+        }
+
+        document.addEventListener("keydown", (e) => {
+            switch (e.key) {
+                case "ArrowUp": player1.y -= 10; break;
+                case "ArrowDown": player1.y += 10; break;
+                case "ArrowLeft": player1.x -= 10; break;
+                case "ArrowRight": player1.x += 10; break;
+                case "w": player2.y -= 10; break;
+                case "s": player2.y += 10; break;
+                case "a": player2.x -= 10; break;
+                case "d": player2.x += 10; break;
+            }
+            updateCanvas();
+        });
+
+        updateCanvas();
+    </script>
+</body>
+</html>
