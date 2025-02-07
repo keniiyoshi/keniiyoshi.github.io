@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 400;
 
-const socket = new WebSocket("ws://localhost:3000");
+const socket = new WebSocket("https://lovely-dependent-ability-ki573.replit.app/");
 
 let player = { x: 100, y: 100, width: 20, height: 20, color: "blue", isIt: false };
 let opponent = { x: 300, y: 200, width: 20, height: 20, color: "red", isIt: true };
