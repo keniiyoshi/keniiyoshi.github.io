@@ -131,8 +131,48 @@
 		<div class="blog-post">
 			<h1 class="blog-title">HW #1</h1>
 			<h2 class="date"> HW | Wed. 3rd Jan 2018</h2>
-			<div class="my-div">DESCRIBE your most memorable educational experience pre-NYUAD. This could be a singular moment where you came to an epiphany-like realization or a drawn-out process where understanding was realized over a period of time. It could have happened within school or outside of any formal educational setting. Why is this your most memorable experience? Was the experience an ‘explorable’ one or not? Were elements of Papert’s “Constructionism” involved? Explain why or why not?</div>
+			<div class="my-div">DESCRIBE your most memorable educational experience pre-NYUAD. This could be a singular moment where you came to an epiphany-like realization or a drawn-out process where understanding was realized over a period of time. It could have happened within school or outside of any formal educational setting. Why is this your most memorable experience? Was the experience an 'explorable' one or not? Were elements of Papert's "Constructionism" involved? Explain why or why not?</div>
 			<div class="my-div special-div">My most memorable educational experience happened while I was participating in Japan China Korea Youth History Experience Summer camp in the summer of 2012. The camp was held in the Chinese city of Dalian, and this was the first time for me to travel to China. In this week-long camp, among debating about historical issues centered around Japanese colonialism during and before WWII, I naively tried to learn many Chinese and Korean phrases, but mostly to no avail. However, there was one phrase that I actually nailed perfectly, which was a Korean phrase that was equivalent to "Thanks to you, I had a very nice day". When I said this to my Korean roommates during the camp, they were both suprised and impressed. One of them even gifted me his Korean instant noodles. This was the first time when I realized how rewarding it was to be able to communicate a foreign language. </div>
+		</div>
+
+		<div class="blog-post">
+			<h1 class="blog-title">SQL Exercise</h1>
+			<h2 class="date"> Mon. 3rd Jan 2025</h2>
+			<div class="my-div">DESCRIBE your most memorable educational experience pre-NYUAD. This could be a singular moment where you came to an epiphany-like realization or a drawn-out process where understanding was realized over a period of time. It could have happened within school or outside of any formal educational setting. Why is this your most memorable experience? Was the experience an 'explorable' one or not? Were elements of Papert's "Constructionism" involved? Explain why or why not?</div>
+			<div class="my-div special-div">
+                My most memorable educational experience happened while I was participating in Japan China Korea Youth History Experience Summer camp in the summer of 2012. Speaking of memorable experiences, let me demonstrate how we might store and query such experiences in a SQL database:
+                
+                <pre><code class="sql">
+-- Create a table to store international experiences
+CREATE TABLE international_experiences (
+    id INT PRIMARY KEY,
+    country VARCHAR(50),
+    city VARCHAR(50),
+    event_name VARCHAR(100),
+    year INT,
+    learned_phrase VARCHAR(100),
+    language VARCHAR(50)
+);
+
+-- Insert my experience
+INSERT INTO international_experiences VALUES (
+    1,
+    'China',
+    'Dalian',
+    'Japan China Korea Youth History Experience Summer Camp',
+    2012,
+    'Thanks to you, I had a very nice day',
+    'Korean'
+);
+
+-- Query to find experiences where I learned new phrases
+SELECT country, city, learned_phrase, language
+FROM international_experiences
+WHERE learned_phrase IS NOT NULL;
+                </code></pre>
+
+                During this week-long camp, among debating about historical issues centered around Japanese colonialism during and before WWII, I naively tried to learn many Chinese and Korean phrases, but mostly to no avail. However, there was one phrase that I actually nailed perfectly, which was a Korean phrase that was equivalent to "Thanks to you, I had a very nice day". When I said this to my Korean roommates during the camp, they were both surprised and impressed. One of them even gifted me his Korean instant noodles. This was the first time when I realized how rewarding it was to be able to communicate in a foreign language.
+            </div>
 		</div>
 
 

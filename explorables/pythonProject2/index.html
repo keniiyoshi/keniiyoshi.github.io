@@ -825,7 +825,17 @@ var PACMAN = (function () {
     var state        = WAITING,
         audio        = null,
         ghosts       = [],
-        ghostSpecs   = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"],
+        ghostSpecs   = [
+            "#00FFDE", // Original cyan ghost
+            "#FF0000", // Original red ghost
+            "#FFB8DE", // Original pink ghost
+            "#FFB847", // Original orange ghost
+            "#50FF50", // New green ghost
+            "#FF50FF", // New magenta ghost
+            "#FFFF50", // New yellow ghost
+            "#50FFFF", // New light blue ghost
+            "#FF8080"  // New light red ghost
+        ],
         eatenCount   = 0,
         level        = 0,
         tick         = 0,
