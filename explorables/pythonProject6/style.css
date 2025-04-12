@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    font-family: Arial, sans-serif;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#scoreboard {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    gap: 20px;
+}
+
+#player1-score, #player2-score {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#player1-score {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+#player2-score {
+    background-color: rgba(0, 0, 255, 0.3);
+}
+
+#controls-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+}
+
+#story-dialog {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    max-width: 80%;
+    transition: opacity 0.3s ease;
+}
+
+h3 {
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+canvas {
+    display: block;
+} 

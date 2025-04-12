@@ -16,15 +16,41 @@ bgMusic.volume = 0.4; // Set volume to 40% (slightly lower than before)
 // Sound effects
 const soundEffects = {
     shoot: new Audio('https://raw.githubusercontent.com/daleharvey/pacman/master/audio/eatpill.mp3'), // Pacman power-up sound
-    hit: new Audio('https://themushroomkingdom.net/sounds/wav/smb/smb_jump-small.wav')    // Mario jump sound
+    hit: new Audio('https://themushroomkingdom.net/sounds/wav/smb/smb_jump-small.wav'),    // Mario jump sound
+    wallHit: new Audio(), // New sound effect for wall hits
+    wallDestroy: new Audio('https://freesound.org/data/previews/156/156031_2703579-lq.mp3') // Bubble pop sound for wall destruction
 };
 
 // Audio context for potential custom sounds
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
+// Function to create a wall hit sound
+function createWallHitSound() {
+    // Create oscillator for the "thud" sound
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(150, audioContext.currentTime); // Low frequency for a "thud"
+    oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.2); // Descending pitch
+    
+    // Create gain node for volume control
+    const gainNode = audioContext.createGain();
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // Start at 30% volume
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3); // Quick fade out
+    
+    // Connect nodes
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Start and stop the sound
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.3);
+}
+
 // Set lower volume for sound effects
 soundEffects.shoot.volume = 0.3;
 soundEffects.hit.volume = 0.6;
+soundEffects.wallHit.volume = 0.3;
+soundEffects.wallDestroy.volume = 0.5; // Medium volume for wall destruction
 
 // Add audio controls to the UI
 const audioControls = document.createElement('div');
@@ -38,6 +64,19 @@ audioControls.innerHTML = `
     </button>
 `;
 document.body.appendChild(audioControls);
+
+// Add game controls to the UI
+const gameControls = document.createElement('div');
+gameControls.style.position = 'absolute';
+gameControls.style.top = '10px';
+gameControls.style.left = '10px';
+gameControls.style.color = 'white';
+gameControls.innerHTML = `
+    <button id="regenerateWalls" style="padding: 5px; background: #FF9800; color: white; border: none; border-radius: 3px; cursor: pointer;">
+        Regenerate Walls
+    </button>
+`;
+document.body.appendChild(gameControls);
 
 // Add story dialog box
 const storyDialog = document.createElement('div');
@@ -110,6 +149,29 @@ document.getElementById('toggleMusic').addEventListener('click', () => {
     musicPlaying = !musicPlaying;
 });
 
+// Regenerate walls functionality
+document.getElementById('regenerateWalls').addEventListener('click', () => {
+    // Send request to server to regenerate walls
+    socket.send(JSON.stringify({
+        type: 'regenerateWalls'
+    }));
+    
+    // Visual feedback for button press
+    const button = document.getElementById('regenerateWalls');
+    button.style.background = '#FFC107';
+    button.textContent = 'Regenerating...';
+    
+    // Reset button after a short delay
+    setTimeout(() => {
+        button.style.background = '#FF9800';
+        button.textContent = 'Regenerate Walls';
+    }, 1000);
+    
+    // Add story event
+    const randomRegenerateStory = eventStories.regenerateWalls[Math.floor(Math.random() * eventStories.regenerateWalls.length)];
+    updateStoryDialog(randomRegenerateStory, true);
+});
+
 // Game state
 let gameState = {
     players: {},
@@ -117,8 +179,10 @@ let gameState = {
     items: [], // Items (cookies, carrots, and tuna cans)
     health: {},
     npcs: [], // Add NPCs to the game state
+    walls: [], // Add walls to the game state
     animations: [], // Add animations for effects
     playerHitEffects: {}, // Track player hit effects (jumping and flashing)
+    npcHitEffects: {}, // Track NPC hit effects
     storyState: {
         currentStory: 0,
         waitingForInput: true,
@@ -131,14 +195,16 @@ let gameState = {
             cookiesEaten: 0,
             carrotsHit: 0,
             tunaHit: 0,
-            score: 0
+            score: 0,
+            wallsDestroyed: 0 // Add wall destruction stats
         },
         // Stats for Jiji (player 2)
         jiji: {
             cookiesHit: 0,
             carrotsHit: 0,
             tunaEaten: 0,
-            score: 0
+            score: 0,
+            wallsDestroyed: 0 // Add wall destruction stats
         }
     },
     lastItemSpawn: 0, // Track when the last item was spawned
@@ -150,6 +216,7 @@ const PLAYER_SIZE = 40;
 const PLAYER_SPEED = 4;
 const ITEM_SPEED = 3;
 const ITEM_SIZE = 15;
+const WALL_SIZE = 40; // Add wall size constant
 
 // Sprite character properties for NPC
 const SPRITE_WIDTH = 32;
@@ -204,9 +271,33 @@ socket.onmessage = (event) => {
             break;
             
         case 'gameState':
+            // Check for destroyed walls
+            if (data.walls && gameState.walls.length > 0) {
+                // Look for walls that existed before but are now gone (destroyed)
+                gameState.walls.forEach(oldWall => {
+                    // If a wall from previous state is not in the new state, it was destroyed
+                    const stillExists = data.walls.some(newWall => 
+                        newWall.x === oldWall.x && newWall.y === oldWall.y);
+                    
+                    if (!stillExists) {
+                        // Play wall destruction sound
+                        soundEffects.wallDestroy.currentTime = 0;
+                        soundEffects.wallDestroy.play().catch(e => console.log('Error playing wall destroy sound:', e));
+                        
+                        // Create destruction animation
+                        createWallDestructionAnimation(oldWall.x, oldWall.y);
+                        
+                        // Add story event
+                        const randomWallDestroyStory = eventStories.wallDestroyed[Math.floor(Math.random() * eventStories.wallDestroyed.length)];
+                        updateStoryDialog(randomWallDestroyStory, true);
+                    }
+                });
+            }
+            
             gameState.players = data.players;
             // We're now generating items locally, so we don't need to get them from the server
             gameState.npcs = data.npcs || [];
+            gameState.walls = data.walls || []; // Add walls to game state
             updatePlayerStatus();
             break;
             
@@ -214,6 +305,30 @@ socket.onmessage = (event) => {
             if (data.playerId === gameState.localPlayer) {
                 playerStatus.textContent = "Game Over! Too many wrong foods!";
                 setTimeout(() => updatePlayerStatus(), 2000);
+            }
+            break;
+            
+        case 'wallHit':
+            // Play custom wall hit sound
+            createWallHitSound();
+            break;
+            
+        case 'wallDestroyed':
+            // Update stats for wall destruction
+            if (data.playerId !== undefined) {
+                const playerIds = Object.keys(gameState.players).sort();
+                const isJijiDestroyer = data.playerId === playerIds[0];
+                
+                if (isJijiDestroyer) {
+                    gameState.gameStats.jiji.wallsDestroyed++;
+                    gameState.gameStats.jiji.score += 5; // Bonus points for destroying walls
+                } else {
+                    gameState.gameStats.bo.wallsDestroyed++;
+                    gameState.gameStats.bo.score += 5; // Bonus points for destroying walls
+                }
+                
+                // Update the stats display
+                updateGameStats();
             }
             break;
     }
@@ -415,10 +530,23 @@ function drawAnimations() {
         ctx.globalAlpha = anim.alpha;
         
         // Draw particle based on type
-        ctx.beginPath();
-        ctx.fillStyle = anim.color;
-        ctx.arc(anim.x, anim.y, anim.size, 0, Math.PI * 2);
-        ctx.fill();
+        if (anim.type === 'smoke') {
+            // Draw smoke particle (semi-transparent circle)
+            ctx.beginPath();
+            ctx.fillStyle = anim.color;
+            ctx.arc(anim.x, anim.y, anim.size, 0, Math.PI * 2);
+            ctx.fill();
+        } else if (anim.type === 'debris') {
+            // Draw debris particle (small rectangle)
+            ctx.fillStyle = anim.color;
+            ctx.fillRect(anim.x - anim.size/2, anim.y - anim.size/2, anim.size, anim.size);
+        } else {
+            // Default particle (circle)
+            ctx.beginPath();
+            ctx.fillStyle = anim.color;
+            ctx.arc(anim.x, anim.y, anim.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     });
     
     // Reset global alpha
@@ -454,7 +582,8 @@ const storyLines = [
     "Use the arrow keys to move in any direction.",
     "Catch your favorite foods and avoid the others!",
     "Enjoy the relaxing Stardew Valley music while you play!",
-    "Who will score the most points? The race is on!"
+    "Who will score the most points? The race is on!",
+    "Break through walls to find hidden paths and treasures!"
 ];
 
 // Event-based story elements
@@ -476,6 +605,18 @@ const eventStories = {
         "Look out below! More food is falling.",
         "Incoming! Catch the right items for points.",
         "Heads up! Don't let your favorite foods hit the ground."
+    ],
+    wallDestroyed: [
+        "The wall crumbles to dust! A new path opens.",
+        "CRASH! Another wall bites the dust.",
+        "The brick wall is no more. Onward!",
+        "With a satisfying crumble, the wall is destroyed."
+    ],
+    regenerateWalls: [
+        "The maze reshapes itself! New challenges await.",
+        "The walls have returned, stronger than before.",
+        "A new labyrinth forms around Bo and Jiji.",
+        "The playing field has changed! Adapt or perish."
     ]
 };
 
@@ -553,6 +694,7 @@ boStats.innerHTML = `
         <div>Cookies Eaten: <span id="bo-cookies">0</span></div>
         <div>Carrots Hit: <span id="bo-carrots">0</span></div>
         <div>Tuna Hit: <span id="bo-tuna">0</span></div>
+        <div>Walls Destroyed: <span id="bo-walls">0</span></div>
         <div>Score: <span id="bo-score">0</span></div>
     </div>
 `;
@@ -567,6 +709,7 @@ jijiStats.innerHTML = `
         <div>Cookies Hit: <span id="jiji-cookies">0</span></div>
         <div>Carrots Hit: <span id="jiji-carrots">0</span></div>
         <div>Tuna Eaten: <span id="jiji-tuna">0</span></div>
+        <div>Walls Destroyed: <span id="jiji-walls">0</span></div>
         <div>Score: <span id="jiji-score">0</span></div>
     </div>
 `;
@@ -584,12 +727,14 @@ function updateGameStats() {
     document.getElementById('bo-cookies').textContent = gameState.gameStats.bo.cookiesEaten;
     document.getElementById('bo-carrots').textContent = gameState.gameStats.bo.carrotsHit;
     document.getElementById('bo-tuna').textContent = gameState.gameStats.bo.tunaHit;
+    document.getElementById('bo-walls').textContent = gameState.gameStats.bo.wallsDestroyed;
     document.getElementById('bo-score').textContent = gameState.gameStats.bo.score;
     
     // Update Jiji's stats
     document.getElementById('jiji-cookies').textContent = gameState.gameStats.jiji.cookiesHit;
     document.getElementById('jiji-carrots').textContent = gameState.gameStats.jiji.carrotsHit;
     document.getElementById('jiji-tuna').textContent = gameState.gameStats.jiji.tunaEaten;
+    document.getElementById('jiji-walls').textContent = gameState.gameStats.jiji.wallsDestroyed;
     document.getElementById('jiji-score').textContent = gameState.gameStats.jiji.score;
 }
 
@@ -760,6 +905,135 @@ function checkItemCollisions() {
     }
 }
 
+// Add wall drawing function
+function drawWall(wall) {
+    ctx.fillStyle = wall.health > 50 ? '#8B4513' : '#A0522D'; // Brown color, lighter when damaged
+    ctx.fillRect(wall.x, wall.y, WALL_SIZE, WALL_SIZE);
+    
+    // Add brick pattern
+    ctx.strokeStyle = '#5D4037';
+    ctx.lineWidth = 2;
+    
+    // Horizontal lines
+    for (let y = wall.y + WALL_SIZE/3; y < wall.y + WALL_SIZE; y += WALL_SIZE/3) {
+        ctx.beginPath();
+        ctx.moveTo(wall.x, y);
+        ctx.lineTo(wall.x + WALL_SIZE, y);
+        ctx.stroke();
+    }
+    
+    // Vertical lines - staggered brick pattern
+    for (let x = wall.x + WALL_SIZE/4; x < wall.x + WALL_SIZE; x += WALL_SIZE/2) {
+        // Top section
+        ctx.beginPath();
+        ctx.moveTo(x, wall.y);
+        ctx.lineTo(x, wall.y + WALL_SIZE/3);
+        ctx.stroke();
+        
+        // Middle section - offset
+        ctx.beginPath();
+        ctx.moveTo(x - WALL_SIZE/4, wall.y + WALL_SIZE/3);
+        ctx.lineTo(x - WALL_SIZE/4, wall.y + 2*WALL_SIZE/3);
+        ctx.stroke();
+        
+        // Bottom section
+        ctx.beginPath();
+        ctx.moveTo(x, wall.y + 2*WALL_SIZE/3);
+        ctx.lineTo(x, wall.y + WALL_SIZE);
+        ctx.stroke();
+    }
+    
+    // Add cracks when damaged
+    if (wall.health <= 75) {
+        ctx.strokeStyle = '#3E2723';
+        ctx.beginPath();
+        ctx.moveTo(wall.x + WALL_SIZE/4, wall.y);
+        ctx.lineTo(wall.x + WALL_SIZE/2, wall.y + WALL_SIZE/2);
+        ctx.stroke();
+    }
+    
+    if (wall.health <= 50) {
+        ctx.beginPath();
+        ctx.moveTo(wall.x + 3*WALL_SIZE/4, wall.y);
+        ctx.lineTo(wall.x + WALL_SIZE/2, wall.y + 3*WALL_SIZE/4);
+        ctx.stroke();
+    }
+    
+    if (wall.health <= 25) {
+        ctx.beginPath();
+        ctx.moveTo(wall.x, wall.y + WALL_SIZE/4);
+        ctx.lineTo(wall.x + WALL_SIZE/2, wall.y + WALL_SIZE/2);
+        ctx.stroke();
+    }
+}
+
+// Add a function to create a wall destruction animation
+function createWallDestructionAnimation(x, y) {
+    // Create multiple smoke particles
+    const particleCount = 15;
+    const baseLifetime = 30; // frames
+    
+    for (let i = 0; i < particleCount; i++) {
+        // Random position within the wall
+        const posX = x + Math.random() * WALL_SIZE;
+        const posY = y + Math.random() * WALL_SIZE;
+        
+        // Random velocity
+        const velX = (Math.random() - 0.5) * 3;
+        const velY = (Math.random() - 0.5) * 3 - 1; // Slight upward bias
+        
+        // Random size
+        const size = 5 + Math.random() * 15;
+        
+        // Random lifetime variation
+        const lifetime = baseLifetime + Math.random() * 20;
+        
+        // Add particle to animations
+        gameState.animations.push({
+            type: 'smoke',
+            x: posX,
+            y: posY,
+            velX: velX,
+            velY: velY,
+            size: size,
+            alpha: 0.8,
+            lifetime: lifetime,
+            maxLifetime: lifetime,
+            color: Math.random() > 0.7 ? '#FFA500' : '#555555' // Some orange embers among the smoke
+        });
+    }
+    
+    // Add some brick debris particles
+    for (let i = 0; i < 10; i++) {
+        const posX = x + WALL_SIZE/2;
+        const posY = y + WALL_SIZE/2;
+        
+        // Random velocity - stronger than smoke
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 4;
+        const velX = Math.cos(angle) * speed;
+        const velY = Math.sin(angle) * speed;
+        
+        // Random size for debris
+        const size = 3 + Math.random() * 7;
+        
+        // Add debris particle
+        gameState.animations.push({
+            type: 'debris',
+            x: posX,
+            y: posY,
+            velX: velX,
+            velY: velY,
+            size: size,
+            alpha: 1.0,
+            lifetime: baseLifetime * 0.7, // Debris disappears faster than smoke
+            maxLifetime: baseLifetime * 0.7,
+            color: '#8B4513', // Brown brick color
+            gravity: 0.2 // Debris is affected by gravity
+        });
+    }
+}
+
 function gameLoop() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -784,6 +1058,13 @@ function gameLoop() {
     
     // Update player hit effects
     updatePlayerHitEffects();
+    
+    // Draw walls
+    if (gameState.walls) {
+        gameState.walls.forEach(wall => {
+            drawWall(wall);
+        });
+    }
     
     // Draw all players (Bo and Jiji)
     Object.entries(gameState.players).forEach(([id, player]) => {
@@ -824,13 +1105,15 @@ Promise.all([
             cookiesEaten: 0,
             carrotsHit: 0,
             tunaHit: 0,
-            score: 0
+            score: 0,
+            wallsDestroyed: 0 // Add wall destruction stats
         },
         jiji: {
             cookiesHit: 0,
             carrotsHit: 0,
             tunaEaten: 0,
-            score: 0
+            score: 0,
+            wallsDestroyed: 0 // Add wall destruction stats
         }
     };
     
@@ -849,5 +1132,5 @@ Promise.all([
     updateStoryDialog("Welcome to Bo and Jiji's Food Adventure! Enjoy the Stardew Valley music!");
 
     // Start the game loop
-    gameLoop();
+gameLoop();
 });
