@@ -229,7 +229,7 @@ const backgroundImage = new Image();
 backgroundImage.src = '../pythonProject/background.png';
 
 // Connect to WebSocket server
-const socket = new WebSocket('wss://3ba440f4-f292-4905-9d9f-527f81074ff7-00-30pdhdek6zv36.pike.replit.dev/');
+const socket = new WebSocket('wss://d6d4bfd4-c636-4afa-996b-36f020065740-00-1sjapflo38jfq.sisko.replit.dev:3000');
 
 // WebSocket event handlers
 socket.onopen = () => {
