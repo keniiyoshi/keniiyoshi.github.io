@@ -1,0 +1,160 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12pt;
+  margin: 0;
+  line-height: 1.2em;
+  text-align: center;
+  background: linear-gradient(to bottom, #fff8dc 0%, #ffe4b5 100%);
+}
+
+h1 {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  margin: 0;
+  padding: 30pt 10pt;
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.2);
+  font-size: 42px;
+  letter-spacing: 2px;
+}
+
+.main-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.welcome-text {
+  margin: 40px 20px;
+  font-size: 28px;
+  color: #8b4513;
+  font-weight: 300;
+}
+
+/* Category sections */
+.category-section {
+  margin: 60px 0;
+}
+
+.section-header {
+  margin: 40px 0 30px 0;
+  font-size: 36px;
+  color: #d2691e;
+  font-weight: 300;
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #d2691e, transparent);
+}
+
+/* Project grid layout */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+.project-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  padding: 25px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border-color: #ff6b9d;
+}
+
+.project-card h3 {
+  margin: 0 0 15px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #c06c84;
+  font-size: 20px;
+}
+
+.project-card a {
+  text-decoration: none;
+  display: block;
+}
+
+.project-card img {
+  width: 100%;
+  max-width: 220px;
+  height: 165px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0 auto 15px auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.project-description {
+  font-size: 15px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* Map section special styling */
+.map-section {
+  margin-top: 60px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 15px;
+}
+
+.map-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 20px;
+  }
+  
+  .welcome-text {
+    margin: 20px;
+    font-size: 22px;
+  }
+
+  h1 {
+    font-size: 32px;
+    padding: 20pt 10pt;
+  }
+
+  .section-header {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
