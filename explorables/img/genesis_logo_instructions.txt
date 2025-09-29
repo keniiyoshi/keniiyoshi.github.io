@@ -1,0 +1,19 @@
+Genesis Embodied AI Logo Download Instructions
+===============================================
+
+To add the Genesis Embodied AI logo to this folder:
+
+1. Visit: https://github.com/Genesis-Embodied-AI/Genesis
+2. Navigate to the docs/assets directory
+3. Look for the logo file (usually named logo.png or genesis_logo.png)
+4. Download the logo file
+5. Rename it to "genesis-logo.png" and place it in this img folder
+
+Alternative method:
+- Search for "Genesis Embodied AI logo" on Google Images
+- Find the official logo
+- Right-click and "Save image as..."
+- Save as "genesis-logo.png" in this folder
+
+Once downloaded, you can reference it in your HTML as:
+<img src="img/genesis-logo.png" alt="Genesis Embodied AI Logo">

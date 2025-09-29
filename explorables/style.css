@@ -7,67 +7,107 @@ body{
 }
 
 h1 {
-
-    background-color: #33d;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    margin:0;
-    padding-left: 10pt;
-    padding-right: 10pt;
-    padding-top:25pt;
-    padding-bottom: 15pt;
-    box-shadow: 0px 5px 5px 0px rgba(171,171,171,1);
+  background-color: #33d;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  margin:0;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  padding-top:25pt;
+  padding-bottom: 15pt;
+  box-shadow: 0px 5px 5px 0px rgba(171,171,171,1);
 }
 
-h2  {
-    /* border: 1px solid gray; */
-    /* color: black; */
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    margin:0;
-    padding-left: 10pt;
-    padding-right: 10pt;
-    padding-top:25pt;
-    padding-bottom: 15pt;
-    /* box-shadow: 0px 5px 5px 0px rgba(171,171,171,1); */
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  margin:0;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  padding-top:25pt;
+  padding-bottom: 15pt;
 }
 
 .main-container{
   max-width: 100%;
   width: 100%;
-  /* background-color: pink; */
+}
 
+.welcome-text {
+  margin: 50px;
+  font-size: 24px;
+}
 
-img {
+/* Project grid layout */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.project-card h3 {
+  margin: 0 0 15px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  color: #333;
+  font-size: 18px;
+}
+
+.project-card a {
+  text-decoration: none;
   display: block;
-  max-width: 80%;
-  height: auto;
-  margin: 30px auto;
 }
 
-.title, .text{
-  text-align: center;
+.project-card img {
+  width: 100%;
+  max-width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin: 0 auto 10px auto;
+  display: block;
 }
 
-.title{
-  font-size: 48px;
+.project-description {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
 }
 
-.text{
-  margin: 100px;
-  font-size: 40px;
+/* Section headers */
+.section-header {
+  margin: 50px 0 30px 0;
+  font-size: 32px;
+  color: #33d;
+  font-weight: 200;
 }
 
-#content {
-    margin: 10pt;
-}
-
-#example {
-    border: 1px solid gray;
-    background-color: #b3c8d0;
-    font-size:14pt;
-    padding-left: 10pt;
-    padding-right: 10pt;
-    min-height: 200px;
+/* Responsive design */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+  
+  .welcome-text {
+    margin: 20px;
+    font-size: 20px;
+  }
 }
