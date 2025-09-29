@@ -5,7 +5,317 @@
 		<!-- <meta name="viewport" content="width=device-width"> -->
 		<title>Downtown Cookie Land and Explorables Home Page</title>
     <link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<style>
+			body {
+			  font-family: "Open Sans", sans-serif;
+			  font-size: 12pt;
+			  margin: 0;
+			  line-height: 1.2em;
+			  text-align: center;
+			  background: linear-gradient(to bottom, #fff8dc 0%, #ffe4b5 100%);
+			}
+
+			h1 {
+			  background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+			  color: white;
+			  font-family: Arial, Helvetica, sans-serif;
+			  font-weight: 100;
+			  margin: 0;
+			  padding: 30pt 10pt;
+			  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.2);
+			  font-size: 42px;
+			  letter-spacing: 2px;
+			}
+
+			.main-container {
+			  max-width: 1400px;
+			  width: 100%;
+			  margin: 0 auto;
+			  padding: 20px;
+			}
+
+			.welcome-text {
+			  margin: 40px 20px;
+			  font-size: 28px;
+			  color: #8b4513;
+			  font-weight: 300;
+			}
+
+			/* Category sections */
+			.category-section {
+			  margin: 60px 0;
+			}
+
+			.section-header {
+			  margin: 40px 0 30px 0;
+			  font-size: 36px;
+			  color: #d2691e;
+			  font-weight: 300;
+			  font-family: Arial, Helvetica, sans-serif;
+			  position: relative;
+			  padding-bottom: 15px;
+			}
+
+			.section-header::after {
+			  content: '';
+			  position: absolute;
+			  bottom: 0;
+			  left: 50%;
+			  transform: translateX(-50%);
+			  width: 100px;
+			  height: 3px;
+			  background: linear-gradient(to right, transparent, #d2691e, transparent);
+			}
+
+			/* Project grid layout */
+			.projects-grid {
+			  display: grid;
+			  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			  gap: 25px;
+			  padding: 20px;
+			}
+
+			.project-card {
+			  background: white;
+			  border-radius: 12px;
+			  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+			  padding: 25px;
+			  transition: all 0.3s ease;
+			  border: 2px solid transparent;
+			}
+
+			.project-card:hover {
+			  transform: translateY(-5px) scale(1.02);
+			  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+			  border-color: #ff6b9d;
+			}
+
+			.project-card h3 {
+			  margin: 0 0 15px 0;
+			  font-family: Arial, Helvetica, sans-serif;
+			  font-weight: 400;
+			  color: #c06c84;
+			  font-size: 20px;
+			}
+
+			.project-card a {
+			  text-decoration: none;
+			  display: block;
+			}
+
+			.project-card img {
+			  width: 100%;
+			  max-width: 220px;
+			  height: 165px;
+			  object-fit: cover;
+			  border-radius: 8px;
+			  margin: 0 auto 15px auto;
+			  display: block;
+			  transition: transform 0.3s ease;
+			}
+
+			.project-card:hover img {
+			  transform: scale(1.05);
+			}
+
+			.project-description {
+			  font-size: 15px;
+			  color: #666;
+			  margin-top: 10px;
+			  line-height: 1.4;
+			}
+
+			/* Interactive Map section styling */
+			.map-section {
+			  margin-top: 60px;
+			  padding: 30px;
+			  background: rgba(255, 255, 255, 0.6);
+			  border-radius: 15px;
+			}
+
+			.map-container {
+			  position: relative;
+			  background: #f8f9fa;
+			  padding: 40px;
+			  min-height: 600px;
+			  border-radius: 10px;
+			}
+
+			.map {
+			  position: relative;
+			  width: 100%;
+			  height: 500px;
+			  background: url('./img/food-map.jpg') center/cover no-repeat;
+			  border: 3px solid #333;
+			  border-radius: 10px;
+			  overflow: hidden;
+			}
+
+			.location {
+			  position: absolute;
+			  width: 20px;
+			  height: 20px;
+			  background: #ff4757;
+			  border: 3px solid white;
+			  border-radius: 50%;
+			  cursor: pointer;
+			  transition: all 0.3s ease;
+			  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+			}
+
+			.location:hover {
+			  transform: scale(1.3);
+			  background: #ff3742;
+			  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+			}
+
+			.location.active {
+			  background: #2ed573;
+			  transform: scale(1.2);
+			}
+
+			.location-info {
+			  position: absolute;
+			  background: white;
+			  padding: 20px;
+			  border-radius: 10px;
+			  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+			  min-width: 300px;
+			  max-width: 400px;
+			  opacity: 0;
+			  transform: translateY(-10px);
+			  transition: all 0.3s ease;
+			  pointer-events: none;
+			  z-index: 1000;
+			}
+
+			.location-info.show {
+			  opacity: 1;
+			  transform: translateY(0);
+			}
+
+			.location-info h3 {
+			  color: #2c3e50;
+			  margin-bottom: 10px;
+			  font-size: 1.3em;
+			}
+
+			.location-info p {
+			  color: #7f8c8d;
+			  line-height: 1.6;
+			  margin-bottom: 10px;
+			}
+
+			.location-info .address {
+			  font-weight: bold;
+			  color: #34495e;
+			}
+
+			.location-info .category {
+			  display: inline-block;
+			  background: #3498db;
+			  color: white;
+			  padding: 5px 10px;
+			  border-radius: 15px;
+			  font-size: 0.8em;
+			  margin-top: 10px;
+			}
+
+			.legend {
+			  margin-top: 20px;
+			  display: flex;
+			  justify-content: center;
+			  gap: 30px;
+			  flex-wrap: wrap;
+			}
+
+			.legend-item {
+			  display: flex;
+			  align-items: center;
+			  gap: 10px;
+			  background: white;
+			  padding: 10px 15px;
+			  border-radius: 20px;
+			  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.legend-color {
+			  width: 15px;
+			  height: 15px;
+			  border-radius: 50%;
+			  border: 2px solid white;
+			}
+
+			.controls {
+			  margin-top: 20px;
+			  text-align: center;
+			}
+
+			.btn {
+			  background: linear-gradient(45deg, #667eea, #764ba2);
+			  color: white;
+			  border: none;
+			  padding: 12px 25px;
+			  border-radius: 25px;
+			  cursor: pointer;
+			  font-size: 1em;
+			  margin: 0 10px;
+			  transition: all 0.3s ease;
+			}
+
+			.btn:hover {
+			  transform: translateY(-2px);
+			  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+			}
+
+			.stats {
+			  margin-top: 20px;
+			  text-align: center;
+			  color: #7f8c8d;
+			}
+
+			/* Responsive design */
+			@media (max-width: 768px) {
+			  .projects-grid {
+			    grid-template-columns: 1fr;
+			    padding: 10px;
+			    gap: 20px;
+			  }
+			  
+			  .welcome-text {
+			    margin: 20px;
+			    font-size: 22px;
+			  }
+
+			  h1 {
+			    font-size: 32px;
+			    padding: 20pt 10pt;
+			  }
+
+			  .section-header {
+			    font-size: 28px;
+			  }
+			  
+			  .map-container {
+			    padding: 20px;
+			  }
+			  
+			  .location-info {
+			    min-width: 250px;
+			    max-width: 300px;
+			  }
+			  
+			  .legend {
+			    gap: 15px;
+			  }
+			}
+
+			@media (min-width: 769px) and (max-width: 1024px) {
+			  .projects-grid {
+			    grid-template-columns: repeat(2, 1fr);
+			  }
+			}
+		</style>
 	</head>
 	<body>
 		<h1>🍪 DOWNTOWN COOKIE LAND 🍪</h1>
@@ -13,185 +323,380 @@
 		<div class="main-container">
 			<div class="welcome-text">Welcome to downtown cookie land!</div>
 			
-			<!-- Games Section -->
-			<div class="category-section">
-				<h2 class="section-header">🎮 Games & Adventures</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<a href="./pythonProject/index.html">
-							<h3>Tic Tac Toe</h3>
-							<img src="./img/tictactoe.png" alt="Tic Tac Toe">
-							<div class="project-description">Classic game implementation</div>
-						</a>
-					</div>
-					
-					<div class="project-card">
-						<a href="./pythonProject2/index.html">
-							<h3>Mochi Dungeon</h3>
-							<img src="./img/mochi-dungeon.png" alt="Mochi Dungeon">
-							<div class="project-description">Adventure game</div>
-						</a>
-					</div>
-					
-					<div class="project-card">
-						<a href="./pythonProject3/html5-rpg/index.html">
-							<h3>HTML5 RPG</h3>
-							<img src="./img/mochi-dungeon.png" alt="RPG Game">
-							<div class="project-description">Role-playing game</div>
-						</a>
-					</div>
-					
-					<div class="project-card">
-						<a href="./3D-Maze-Game/index.html">
-							<h3>3D Maze Game</h3>
-							<img src="./img/mochi-dungeon.png" alt="3D Maze">
-							<div class="project-description">Navigate through a 3D maze</div>
-						</a>
-					</div>
-					
-					<div class="project-card">
-						<a href="./pythonProject5/index.html">
-							<h3>Shared Walls Game</h3>
-							<img src="./img/mochi-dungeon.png" alt="Shared Walls">
-							<div class="project-description">Multiplayer puzzle game</div>
-						</a>
-					</div>
-					
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Shared Walls (Backup)</h3>
-							<img src="./img/mochi-dungeon.png" alt="Shared Walls Backup">
-							<div class="project-description">Previous version backup</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Entertainment Section -->
-			<div class="category-section">
-				<h2 class="section-header">🎭 Entertainment District</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Music Station</h3>
-							<img src="./img/mochi-dungeon.png" alt="Music Station">
-							<div class="project-description">Donguri korokoro, mochi mart tunes, and more!</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Cartoons Studio</h3>
-							<img src="./img/mochi-dungeon.png" alt="Cartoons Studio">
-							<div class="project-description">Watch your favorite cookie land cartoons</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>BoMC Theaters</h3>
-							<img src="./img/mochi-dungeon.png" alt="BoMC Theaters">
-							<div class="project-description">Catch the latest movies in town</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Guri's Jelly Fish Dance Club</h3>
-							<img src="./img/pizza.png" alt="Dance Club">
-							<div class="project-description">Dance the night away with jellyfish friends</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Recreation & Activities Section -->
-			<div class="category-section">
-				<h2 class="section-header">🎪 Recreation & Activities</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Mochi Theme Park</h3>
-							<img src="./img/mochi-dungeon.png" alt="Theme Park">
-							<div class="project-description">Thrilling rides and fun attractions</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Guri's Skate Park</h3>
-							<img src="./img/pizza.png" alt="Skate Park">
-							<div class="project-description">Show off your skating skills</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Bold Gym</h3>
-							<img src="./img/mochi-dungeon.png" alt="Bold Gym">
-							<div class="project-description">Get fit with cookie-style exercises</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Warawara School</h3>
-							<img src="./img/warawara.gif" alt="Warawara School">
-							<div class="project-description">Warawaras go to school!</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Food & Dining Section -->
-			<div class="category-section">
-				<h2 class="section-header">🍕 Food & Dining</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Bo's Pizzeria</h3>
-							<img src="./img/pizza.png" alt="Pizzeria">
-							<div class="project-description">Fresh pizza delivered to your door!</div>
-						</a>
-					</div>
-
-					<div class="project-card">
-						<a href="./pythonProject5backup16march/index.html">
-							<h3>Bo's Cookie Joints</h3>
-							<img src="./img/mochi-dungeon.png" alt="Cookie Joints">
-							<div class="project-description">The finest cookies in town</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Residential Section -->
-			<div class="category-section">
-				<h2 class="section-header">🏠 Residential Area</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<a href="./mochi-house/mochi-house.html">
-							<h3>Mochi House</h3>
-							<img src="./mochi-house/moch-moch.png" alt="Mochi House">
-							<div class="project-description">Mochi is back home!</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Map Section -->
+			<!-- Interactive Map Section -->
 			<div class="map-section">
-				<h2 class="section-header">🗺️ Explore Downtown</h2>
-				<div class="projects-grid">
-					<div class="project-card map-card">
-						<a href="./map/index.html">
-							<h3>Downtown Cookie Land Map</h3>
-							<img src="./img/food-map.jpg" alt="Food Map">
-							<div class="project-description">Navigate through all the amazing locations in Cookie Land</div>
-						</a>
+				<h2 class="section-header">🗺️ Interactive Downtown Cookie Land Map</h2>
+				<div class="map-container">
+					<div class="map" id="map">
+						<!-- Locations will be added dynamically -->
+					</div>
+
+					<div class="legend">
+						<div class="legend-item">
+							<div class="legend-color" style="background: #ff4757;"></div>
+							<span>Locations</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color" style="background: #2ed573;"></div>
+							<span>Selected</span>
+						</div>
+					</div>
+
+					<div class="controls">
+						<button class="btn" onclick="showAllLocations()">Show All</button>
+						<button class="btn" onclick="hideAllInfo()">Hide Info</button>
+						<button class="btn" onclick="resetMap()">Reset</button>
+					</div>
+
+					<div class="stats">
+						<p>📍 <span id="locationCount">0</span> locations • Click any marker to learn more!</p>
 					</div>
 				</div>
 			</div>
+			
+
 		</div>
-	</body	>
+		
+		<script>
+			// Shared data structure for all entries
+			const projectData = {
+				"🎮 Games & Adventures": [
+					{
+						name: "Tic Tac Toe",
+						x: 15,
+						y: 20,
+						category: "🎮 Games",
+						address: "./pythonProject/index.html",
+						image: "./img/tictactoe.png",
+						description: "Classic game implementation - play the timeless tic tac toe game!",
+						shortDescription: "Classic game implementation"
+					},
+					{
+						name: "Mochi Dungeon",
+						x: 25,
+						y: 25,
+						category: "🎮 Games",
+						address: "./pythonProject2/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Adventure game - explore the mysterious mochi dungeon!",
+						shortDescription: "Adventure game"
+					},
+					{
+						name: "HTML5 RPG",
+						x: 35,
+						y: 30,
+						category: "🎮 Games",
+						address: "./pythonProject3/html5-rpg/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Role-playing game - embark on epic adventures!",
+						shortDescription: "Role-playing game"
+					},
+					{
+						name: "3D Maze Game",
+						x: 45,
+						y: 35,
+						category: "🎮 Games",
+						address: "./3D-Maze-Game/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Navigate through a 3D maze - find your way out!",
+						shortDescription: "Navigate through a 3D maze"
+					},
+					{
+						name: "Shared Walls Game",
+						x: 55,
+						y: 40,
+						category: "🎮 Games",
+						address: "./pythonProject5/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Multiplayer puzzle game - work together to solve challenges!",
+						shortDescription: "Multiplayer puzzle game"
+					},
+					{
+						name: "Shared Walls (Backup)",
+						x: 65,
+						y: 45,
+						category: "🎮 Games",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Previous version backup of the Shared Walls game.",
+						shortDescription: "Previous version backup"
+					}
+				],
+				"🎭 Entertainment District": [
+					{
+						name: "Music Station",
+						x: 20,
+						y: 60,
+						category: "🎭 Entertainment",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Donguri korokoro, mochi mart tunes, and more! Listen to the best music in Cookie Land.",
+						shortDescription: "Donguri korokoro, mochi mart tunes, and more!"
+					},
+					{
+						name: "Cartoons Studio",
+						x: 30,
+						y: 65,
+						category: "🎭 Entertainment",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Watch your favorite cookie land cartoons - entertainment for all ages!",
+						shortDescription: "Watch your favorite cookie land cartoons"
+					},
+					{
+						name: "BoMC Theaters",
+						x: 40,
+						y: 70,
+						category: "🎭 Entertainment",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Catch the latest movies in town - the premier cinema experience!",
+						shortDescription: "Catch the latest movies in town"
+					},
+					{
+						name: "Guri's Jelly Fish Dance Club",
+						x: 50,
+						y: 75,
+						category: "🎭 Entertainment",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/pizza.png",
+						description: "Dance the night away with jellyfish friends - the hottest club in town!",
+						shortDescription: "Dance the night away with jellyfish friends"
+					}
+				],
+				"🎪 Recreation & Activities": [
+					{
+						name: "Mochi Theme Park",
+						x: 70,
+						y: 20,
+						category: "🎪 Recreation",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Thrilling rides and fun attractions - the ultimate theme park experience!",
+						shortDescription: "Thrilling rides and fun attractions"
+					},
+					{
+						name: "Guri's Skate Park",
+						x: 80,
+						y: 25,
+						category: "🎪 Recreation",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/pizza.png",
+						description: "Show off your skating skills - perfect your tricks and moves!",
+						shortDescription: "Show off your skating skills"
+					},
+					{
+						name: "Bold Gym",
+						x: 75,
+						y: 60,
+						category: "🎪 Recreation",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "Get fit with cookie-style exercises - stay healthy and strong!",
+						shortDescription: "Get fit with cookie-style exercises"
+					},
+					{
+						name: "Warawara School",
+						x: 85,
+						y: 65,
+						category: "🎪 Recreation",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/warawara.gif",
+						description: "Warawaras go to school! Learn and grow with your friends.",
+						shortDescription: "Warawaras go to school!"
+					}
+				],
+				"🍕 Food & Dining": [
+					{
+						name: "Bo's Pizzeria",
+						x: 60,
+						y: 80,
+						category: "🍕 Food & Dining",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/pizza.png",
+						description: "Fresh pizza delivered to your door! The best pizza in Cookie Land.",
+						shortDescription: "Fresh pizza delivered to your door!"
+					},
+					{
+						name: "Bo's Cookie Joints",
+						x: 70,
+						y: 85,
+						category: "🍕 Food & Dining",
+						address: "./pythonProject5backup16march/index.html",
+						image: "./img/mochi-dungeon.png",
+						description: "The finest cookies in town - sweet treats for everyone!",
+						shortDescription: "The finest cookies in town"
+					}
+				],
+				"🏠 Residential Area": [
+					{
+						name: "Mochi House",
+						x: 10,
+						y: 80,
+						category: "🏠 Residential",
+						address: "./mochi-house/mochi-house.html",
+						image: "./mochi-house/moch-moch.png",
+						description: "Mochi is back home! Visit the cozy mochi house and see the comic strip.",
+						shortDescription: "Mochi is back home!"
+					}
+				]
+			};
+
+			// Flatten all locations for map functionality
+			const locations = Object.values(projectData).flat();
+
+			let activeLocation = null;
+			let infoBox = null;
+
+			// Function to generate project sections dynamically
+			function generateProjectSections() {
+				const container = document.querySelector('.main-container');
+				
+				// Find the interactive map section to insert sections after it
+				const mapSection = document.querySelector('.map-section');
+				
+				// Remove existing category sections
+				const existingSections = container.querySelectorAll('.category-section');
+				existingSections.forEach(section => section.remove());
+				
+				// Generate sections from shared data
+				Object.entries(projectData).forEach(([sectionTitle, projects]) => {
+					const sectionDiv = document.createElement('div');
+					sectionDiv.className = 'category-section';
+					
+					const header = document.createElement('h2');
+					header.className = 'section-header';
+					header.textContent = sectionTitle;
+					sectionDiv.appendChild(header);
+					
+					const gridDiv = document.createElement('div');
+					gridDiv.className = 'projects-grid';
+					
+					projects.forEach(project => {
+						const cardDiv = document.createElement('div');
+						cardDiv.className = 'project-card';
+						
+						const link = document.createElement('a');
+						link.href = project.address;
+						
+						const title = document.createElement('h3');
+						title.textContent = project.name;
+						
+						const img = document.createElement('img');
+						img.src = project.image;
+						img.alt = project.name;
+						
+						const description = document.createElement('div');
+						description.className = 'project-description';
+						description.textContent = project.shortDescription;
+						
+						link.appendChild(title);
+						link.appendChild(img);
+						link.appendChild(description);
+						cardDiv.appendChild(link);
+						gridDiv.appendChild(cardDiv);
+					});
+					
+					sectionDiv.appendChild(gridDiv);
+					container.insertBefore(sectionDiv, mapSection.nextSibling);
+				});
+			}
+
+			function createMap() {
+				const map = document.getElementById('map');
+				
+				locations.forEach((location, index) => {
+					const marker = document.createElement('div');
+					marker.className = 'location';
+					marker.style.left = location.x + '%';
+					marker.style.top = location.y + '%';
+					marker.setAttribute('data-index', index);
+					marker.addEventListener('click', () => showLocationInfo(index));
+					map.appendChild(marker);
+				});
+
+				// Create info box
+				infoBox = document.createElement('div');
+				infoBox.className = 'location-info';
+				document.body.appendChild(infoBox);
+
+				// Update location count
+				document.getElementById('locationCount').textContent = locations.length;
+			}
+
+			function showLocationInfo(index) {
+				const location = locations[index];
+				const marker = document.querySelector(`[data-index="${index}"]`);
+				
+				// Remove active class from all markers
+				document.querySelectorAll('.location').forEach(m => m.classList.remove('active'));
+				
+				// Add active class to clicked marker
+				marker.classList.add('active');
+				
+				// Update info box content
+				infoBox.innerHTML = `
+					<h3>${location.name}</h3>
+					<img src="${location.image}" alt="${location.name}" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px; margin: 10px 0;">
+					<p>${location.description}</p>
+					<p class="address">📍 ${location.address}</p>
+					<span class="category">${location.category}</span>
+					<br><br>
+					<button class="btn" onclick="window.open('${location.address}', '_blank')" style="margin-top: 10px; padding: 8px 16px; font-size: 0.9em;">Visit Location</button>
+				`;
+				
+				// Position info box
+				const markerRect = marker.getBoundingClientRect();
+				const mapRect = document.getElementById('map').getBoundingClientRect();
+				
+				let left = markerRect.left + markerRect.width / 2 - 150;
+				let top = markerRect.top - 10;
+				
+				// Adjust if info box goes off screen
+				if (left < 20) left = 20;
+				if (left > window.innerWidth - 320) left = window.innerWidth - 320;
+				if (top < 20) top = markerRect.bottom + 10;
+				
+				infoBox.style.left = left + 'px';
+				infoBox.style.top = top + 'px';
+				infoBox.classList.add('show');
+				
+				activeLocation = index;
+			}
+
+			function hideAllInfo() {
+				document.querySelectorAll('.location').forEach(m => m.classList.remove('active'));
+				if (infoBox) {
+					infoBox.classList.remove('show');
+				}
+				activeLocation = null;
+			}
+
+			function showAllLocations() {
+				locations.forEach((_, index) => {
+					const marker = document.querySelector(`[data-index="${index}"]`);
+					marker.style.opacity = '1';
+					marker.style.transform = 'scale(1)';
+				});
+			}
+
+			function resetMap() {
+				hideAllInfo();
+				showAllLocations();
+			}
+
+			// Initialize everything when page loads
+			document.addEventListener('DOMContentLoaded', function() {
+				generateProjectSections();
+				createMap();
+			});
+
+			// Hide info when clicking outside
+			document.addEventListener('click', (e) => {
+				if (!e.target.classList.contains('location') && !e.target.closest('.location-info')) {
+					hideAllInfo();
+				}
+			});
+		</script>
+	</body>
 </html>
